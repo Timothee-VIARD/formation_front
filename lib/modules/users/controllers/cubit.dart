@@ -14,7 +14,7 @@ class UsersCubit extends Cubit<UsersState> {
       final users = await repository.getUsers();
       emit(UsersLoadSuccess(users));
     } catch (e) {
-      emit(UsersLoadError());
+      emit(UsersLoadError(e));
     }
   }
 }

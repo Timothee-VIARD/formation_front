@@ -10,4 +10,8 @@ class UsersLoadSuccess extends UsersState {
   UsersLoadSuccess(this.users);
 }
 
-class UsersLoadError extends UsersState {}
+class UsersLoadError extends UsersState {
+  final dynamic error;
+
+  UsersLoadError(this.error);
+}
