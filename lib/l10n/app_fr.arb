@@ -1,0 +1,13 @@
+{
+  "app_title": "Gestion de réunion",
+  "users": "Utilisateurs",
+  "users_list": "Liste des utilisateurs",
+  "users_reload": "Recharger les utilisateurs",
+  "users_reload_alert": "Chargez les utilisateurs",
+  "users_reload_error": "Erreur lors du chargement des utilisateurs",
+  "users_data_id": "Id",
+  "users_data_name": "Nom",
+  "users_data_email": "Email",
+  "meetings": "Réunions",
+  "rooms": "Salles"
+}
