@@ -28,32 +28,43 @@ class UsersViewState extends State<UsersView> {
         forceMaterialTransparency: true,
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(AppLocalizations.of(context)!.users_list),
-            const SizedBox(height: 20),
-            BlocBuilder<UsersCubit, UsersState>(
-              builder: (context, state) {
-                return UsersTable(state: state);
-              },
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => context.read<UsersCubit>().getUsers(),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                foregroundColor: Colors.black,
-                side: const BorderSide(color: Colors.black),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+        child: FractionallySizedBox(
+          widthFactor: 2 / 3,
+          heightFactor: 5 / 6,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(AppLocalizations.of(context)!.users_list,
+                  style: const TextStyle(fontSize: 24)),
+              const SizedBox(height: 20),
+              Expanded(
+                child: BlocBuilder<UsersCubit, UsersState>(
+                  builder: (context, state) {
+                    return SizedBox(
+                      width: double.infinity,
+                      child: UsersTable(state: state),
+                    );
+                  },
                 ),
               ),
-              child: Text(
-                AppLocalizations.of(context)!.users_reload,
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () => context.read<UsersCubit>().getUsers(),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.black,
+                  side: const BorderSide(color: Colors.black),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: Text(
+                  AppLocalizations.of(context)!.users_reload,
+                  style: const TextStyle(fontSize: 16),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

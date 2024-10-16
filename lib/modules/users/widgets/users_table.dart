@@ -13,17 +13,19 @@ class UsersTable extends StatelessWidget {
     if (state is UsersInitial) {
       return Text(AppLocalizations.of(context)!.users_reload_alert);
     } else if (state is UsersLoading) {
-      return const CircularProgressIndicator();
+      return const Center(child: CircularProgressIndicator());
     } else if (state is UsersLoadSuccess) {
       return SizedBox(
-        height: 300,
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: DataTable(
             columns: [
-              DataColumn(label: Text(AppLocalizations.of(context)!.users_data_id)),
-              DataColumn(label: Text(AppLocalizations.of(context)!.users_data_name)),
-              DataColumn(label: Text(AppLocalizations.of(context)!.users_data_email)),
+              DataColumn(
+                  label: Text(AppLocalizations.of(context)!.users_data_id)),
+              DataColumn(
+                  label: Text(AppLocalizations.of(context)!.users_data_name)),
+              DataColumn(
+                  label: Text(AppLocalizations.of(context)!.users_data_email)),
             ],
             rows: (state as UsersLoadSuccess).users.map<DataRow>((user) {
               return DataRow(cells: [
@@ -36,7 +38,8 @@ class UsersTable extends StatelessWidget {
         ),
       );
     } else if (state is UsersLoadError) {
-      return Text(AppLocalizations.of(context)!.users_reload_error);
+      return Center(
+          child: Text(AppLocalizations.of(context)!.users_reload_error));
     }
     return const Text('Error');
   }
