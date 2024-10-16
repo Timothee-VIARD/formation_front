@@ -21,56 +21,34 @@ class Home extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                GestureDetector(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => UsersPage()),
-                  ),
-                  child: Container(
-                    width: containerSize,
-                    height: containerSize,
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: Colors.black),
-                    ),
-                    child: Center(child: Text(AppLocalizations.of(context)!.users)),
-                  ),
-                ),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        fixedSize: Size(containerSize, containerSize)),
+                    onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => UsersPage()),
+                        ),
+                    child: Text(AppLocalizations.of(context)!.users)),
                 const SizedBox(width: 40),
-                GestureDetector(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const Rooms()),
-                  ),
-                  child: Container(
-                    width: containerSize,
-                    height: containerSize,
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: Colors.black),
-                    ),
-                    child: Center(child: Text(AppLocalizations.of(context)!.rooms)),
-                  ),
-                ),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        fixedSize: Size(containerSize, containerSize)),
+                    onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Rooms()),
+                        ),
+                    child: Text(AppLocalizations.of(context)!.rooms)),
                 const SizedBox(width: 40),
-                GestureDetector(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const Meetings()),
-                  ),
-                  child: Container(
-                    width: containerSize,
-                    height: containerSize,
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: Colors.black),
-                    ),
-                    child: Center(child: Text(AppLocalizations.of(context)!.meetings)),
-                  ),
-                ),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        fixedSize: Size(containerSize, containerSize)),
+                    onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Meetings()),
+                        ),
+                    child: Text(AppLocalizations.of(context)!.meetings)),
               ],
             ),
           );

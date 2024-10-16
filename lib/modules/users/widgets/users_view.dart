@@ -34,8 +34,15 @@ class UsersViewState extends State<UsersView> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(AppLocalizations.of(context)!.users_list,
-                  style: const TextStyle(fontSize: 24)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(AppLocalizations.of(context)!.users_list,
+                      style: const TextStyle(fontSize: 24)),
+                  const SizedBox(width: 5),
+                  Center(child: IconButton(onPressed: () => context.read<UsersCubit>().getUsers(), icon: const Icon(Icons.refresh))),
+                ],
+              ),
               const SizedBox(height: 20),
               Expanded(
                 child: BlocBuilder<UsersCubit, UsersState>(
@@ -50,14 +57,6 @@ class UsersViewState extends State<UsersView> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () => context.read<UsersCubit>().getUsers(),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  foregroundColor: Colors.black,
-                  side: const BorderSide(color: Colors.black),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
                 child: Text(
                   AppLocalizations.of(context)!.users_reload,
                   style: const TextStyle(fontSize: 16),
