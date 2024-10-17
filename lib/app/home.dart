@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:formation_front/modules/meetings/meetings.dart';
-import 'package:formation_front/modules/rooms/rooms.dart';
-import 'package:formation_front/modules/users/users_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:formation_front/modules/meetings/meetings_page.dart';
+import 'package:formation_front/modules/rooms/rooms_page.dart';
+import 'package:formation_front/modules/users/users_page.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -36,7 +36,7 @@ class Home extends StatelessWidget {
                     onPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const Rooms()),
+                              builder: (context) => const RoomsPage()),
                         ),
                     child: Text(AppLocalizations.of(context)!.rooms)),
                 const SizedBox(width: 40),
@@ -46,7 +46,7 @@ class Home extends StatelessWidget {
                     onPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const Meetings()),
+                              builder: (context) => const MeetingsPage()),
                         ),
                     child: Text(AppLocalizations.of(context)!.meetings)),
               ],

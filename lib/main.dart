@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:formation_front/theme/theme.dart';
 import 'package:formation_front/modules/common/alert/controllers/cubit.dart';
+import 'package:formation_front/theme/theme.dart';
 
 import 'app/home.dart';
-import 'utils/api/bloc_observer.dart';
+import 'utils/observers/bloc_observer.dart';
 
 final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
