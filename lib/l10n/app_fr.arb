@@ -9,6 +9,18 @@
   "users_data_name": "Nom",
   "users_data_email": "Email",
   "users_data_actions": "Actions",
+  "user_create": "Ajouter un nouvel utilisateur",
+    "user_create_alert": "Créer un utilisateur",
+  "user_create_name": "Nom",
+  "user_create_name_error": "Le nom est obligatoire",
+  "user_create_name_hint": "Entrez le nom",
+  "user_create_email": "Email",
+    "user_create_email_error": "L'email est obligatoire",
+    "user_create_email_hint": "Entrez l'email",
+  "user_create_password": "Mot de passe",
+    "user_create_password_error": "Le mot de passe est obligatoire",
+    "user_create_password_hint": "Entrez le mot de passe",
+  "user_create_confirm": "Confirmer la création ?",
   "meetings": "Réunions",
   "rooms": "Salles"
 }

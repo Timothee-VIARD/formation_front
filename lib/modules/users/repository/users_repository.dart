@@ -7,7 +7,7 @@ class UsersRepository {
   UsersRepository();
 
   Future<List<User>> getUsers() async {
-    final List<dynamic> response = await apiService.get('/utilisateurs');
+    final List<dynamic> response = await apiService.get('/utilisateurs/');
     return response.map((user) => User.fromJson(user)).toList();
   }
 
@@ -22,7 +22,7 @@ class UsersRepository {
   }
 
   Future<int> createUser(Map<String, dynamic> data) async {
-    final response = await apiService.post('/utilisateurs', data);
+    final response = await apiService.post('/utilisateurs/', data);
     return response['id'];
   }
 

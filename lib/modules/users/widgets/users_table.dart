@@ -37,7 +37,6 @@ class UsersTable extends StatelessWidget {
                   DataColumn(
                       label: Text(AppLocalizations.of(context)!.users_data_email)),
                   DataColumn(
-
                       label: Text(AppLocalizations.of(context)!.users_data_actions)),
                 ],
                 rows: (state as UsersLoadSuccess).users.map<DataRow>((user) {
