@@ -8,6 +8,7 @@
   "users_data_id": "Id",
   "users_data_name": "Nom",
   "users_data_email": "Email",
+  "users_data_actions": "Actions",
   "meetings": "Réunions",
   "rooms": "Salles"
 }

@@ -17,4 +17,15 @@ class UsersCubit extends Cubit<UsersState> {
       emit(UsersLoadError(e));
     }
   }
+
+  Future<void> deleteUser(int id) async {
+    try {
+      await repository.deleteUserById(id);
+      emit(UsersLoadSuccess(await repository.getUsers()));
+    } catch (e) {
+      emit(UsersLoadError(e));
+      await Future.delayed(const Duration(seconds: 1));
+      emit(UsersLoadSuccess(await repository.getUsers()));
+    }
+  }
 }
