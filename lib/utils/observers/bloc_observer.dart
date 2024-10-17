@@ -22,7 +22,9 @@ class AppBlocObserver extends BlocObserver {
       scaffoldMessengerKey.currentState?.showSnackBar(
         SnackBarPage(
           title: change.nextState.message.toString(),
-          level: change.nextState is NotificationSuccess ? SnackBarLevel.success : SnackBarLevel.error,
+          level: change.nextState is NotificationSuccess
+              ? SnackBarLevel.success
+              : SnackBarLevel.error,
         ).build(scaffoldMessengerKey.currentContext!),
       );
     }

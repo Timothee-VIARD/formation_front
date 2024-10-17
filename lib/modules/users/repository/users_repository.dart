@@ -12,12 +12,14 @@ class UsersRepository {
   }
 
   Future<User> getUserById(int id) async {
-    final Map<String, dynamic> response = await apiService.get('/utilisateurs/$id');
+    final Map<String, dynamic> response =
+        await apiService.get('/utilisateurs/$id');
     return User.fromJson(response);
   }
 
   Future<User> getUserByName(int name) async {
-    final Map<String, dynamic> response = await apiService.get('/utilisateurs/username/$name');
+    final Map<String, dynamic> response =
+        await apiService.get('/utilisateurs/username/$name');
     return User.fromJson(response);
   }
 

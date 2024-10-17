@@ -50,7 +50,8 @@ class CreateUserDialogState extends State<CreateUserDialog> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
-      insetPadding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: verticalPadding),
+      insetPadding: EdgeInsets.symmetric(
+          horizontal: horizontalPadding, vertical: verticalPadding),
       child: Stack(
         children: [
           Container(
@@ -60,7 +61,8 @@ class CreateUserDialogState extends State<CreateUserDialog> {
                 Center(
                   child: Text(
                     AppLocalizations.of(context)!.user_create_alert,
-                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -72,11 +74,13 @@ class CreateUserDialogState extends State<CreateUserDialog> {
                       TextFormField(
                         controller: _nameController,
                         decoration: InputDecoration(
-                          labelText: AppLocalizations.of(context)!.user_create_name,
+                          labelText:
+                              AppLocalizations.of(context)!.user_create_name,
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return AppLocalizations.of(context)!.user_create_name_hint;
+                            return AppLocalizations.of(context)!
+                                .user_create_name_hint;
                           }
                           return null;
                         },
@@ -85,11 +89,13 @@ class CreateUserDialogState extends State<CreateUserDialog> {
                       TextFormField(
                         controller: _emailController,
                         decoration: InputDecoration(
-                          labelText: AppLocalizations.of(context)!.user_create_email,
+                          labelText:
+                              AppLocalizations.of(context)!.user_create_email,
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return AppLocalizations.of(context)!.user_create_email_hint;
+                            return AppLocalizations.of(context)!
+                                .user_create_email_hint;
                           }
                           return null;
                         },
@@ -98,11 +104,13 @@ class CreateUserDialogState extends State<CreateUserDialog> {
                       TextFormField(
                         controller: _passwordController,
                         decoration: InputDecoration(
-                          labelText: AppLocalizations.of(context)!.user_create_password,
+                          labelText: AppLocalizations.of(context)!
+                              .user_create_password,
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return AppLocalizations.of(context)!.user_create_password_hint;
+                            return AppLocalizations.of(context)!
+                                .user_create_password_hint;
                           }
                           return null;
                         },

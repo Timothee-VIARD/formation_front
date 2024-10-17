@@ -31,26 +31,49 @@ class UsersTable extends StatelessWidget {
                 columnSpacing: 10,
                 columns: [
                   DataColumn(
-                      label: Text(AppLocalizations.of(context)!.users_data_id)),
+                    label: Text(AppLocalizations.of(context)!.users_data_id),
+                  ),
                   DataColumn(
-                      label: Text(AppLocalizations.of(context)!.users_data_name)),
+                    label: Text(AppLocalizations.of(context)!.users_data_name),
+                  ),
                   DataColumn(
-                      label: Text(AppLocalizations.of(context)!.users_data_email)),
+                    label: Text(AppLocalizations.of(context)!.users_data_email),
+                  ),
                   DataColumn(
-                      label: Text(AppLocalizations.of(context)!.users_data_actions)),
+                    label:
+                        Text(AppLocalizations.of(context)!.users_data_actions),
+                  ),
                 ],
                 rows: (state as UsersLoadSuccess).users.map<DataRow>((user) {
                   return DataRow(cells: [
-                    DataCell(SizedBox(width: idColumnWidth, child: Text(user.id.toString()))),
-                    DataCell(SizedBox(width: nameColumnWidth, child: Text(user.name))),
-                    DataCell(SizedBox(width: emailColumnWidth, child: Text(user.email))),
-                    DataCell(SizedBox(
+                    DataCell(
+                      SizedBox(
+                        width: idColumnWidth,
+                        child: Text(user.id.toString()),
+                      ),
+                    ),
+                    DataCell(
+                      SizedBox(
+                        width: nameColumnWidth,
+                        child: Text(user.name),
+                      ),
+                    ),
+                    DataCell(
+                      SizedBox(
+                        width: emailColumnWidth,
+                        child: Text(user.email),
+                      ),
+                    ),
+                    DataCell(
+                      SizedBox(
                         width: actionsColumnWidth,
                         child: IconButton(
                           icon: const Icon(Icons.delete),
                           onPressed: () =>
                               context.read<UsersCubit>().deleteUser(user.id),
-                        ))),
+                        ),
+                      ),
+                    ),
                   ]);
                 }).toList(),
               ),

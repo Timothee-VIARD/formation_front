@@ -24,10 +24,10 @@ class SnackBarPage {
       backgroundColor: level == SnackBarLevel.error
           ? Colors.red
           : level == SnackBarLevel.warning
-          ? Colors.orange
-          : level == SnackBarLevel.success
-          ? Colors.green
-          : Colors.blue,
+              ? Colors.orange
+              : level == SnackBarLevel.success
+                  ? Colors.green
+                  : Colors.blue,
       behavior: SnackBarBehavior.floating,
       margin: EdgeInsets.symmetric(horizontal: horizontalMargin, vertical: 10),
       shape: RoundedRectangleBorder(

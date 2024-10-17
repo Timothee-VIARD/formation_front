@@ -7,7 +7,8 @@ import 'package:formation_front/theme/theme.dart';
 import 'app/home.dart';
 import 'utils/observers/bloc_observer.dart';
 
-final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
+final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
+    GlobalKey<ScaffoldMessengerState>();
 
 void main() {
   runApp(const MyApp());

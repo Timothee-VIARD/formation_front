@@ -51,14 +51,17 @@ class UsersViewState extends State<UsersView> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(AppLocalizations.of(context)!.users_list,
-                        style: const TextStyle(fontSize: 24)),
+                    Text(
+                      AppLocalizations.of(context)!.users_list,
+                      style: const TextStyle(fontSize: 24),
+                    ),
                     const SizedBox(width: 5),
                     Center(
-                        child: IconButton(
-                            onPressed: () =>
-                                context.read<UsersCubit>().getUsers(),
-                            icon: const Icon(Icons.refresh))),
+                      child: IconButton(
+                        onPressed: () => context.read<UsersCubit>().getUsers(),
+                        icon: const Icon(Icons.refresh),
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 20),

@@ -22,33 +22,42 @@ class Home extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        fixedSize: Size(containerSize, containerSize)),
-                    onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => UsersPage()),
-                        ),
-                    child: Text(AppLocalizations.of(context)!.users)),
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: Size(containerSize, containerSize),
+                  ),
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => UsersPage(),
+                    ),
+                  ),
+                  child: Text(AppLocalizations.of(context)!.users),
+                ),
                 const SizedBox(width: 40),
                 ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        fixedSize: Size(containerSize, containerSize)),
-                    onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const RoomsPage()),
-                        ),
-                    child: Text(AppLocalizations.of(context)!.rooms)),
+                  style: ElevatedButton.styleFrom(
+                      fixedSize: Size(containerSize, containerSize)),
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const RoomsPage(),
+                    ),
+                  ),
+                  child: Text(AppLocalizations.of(context)!.rooms),
+                ),
                 const SizedBox(width: 40),
                 ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        fixedSize: Size(containerSize, containerSize)),
-                    onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const MeetingsPage()),
-                        ),
-                    child: Text(AppLocalizations.of(context)!.meetings)),
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: Size(containerSize, containerSize),
+                  ),
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MeetingsPage(),
+                    ),
+                  ),
+                  child: Text(AppLocalizations.of(context)!.meetings),
+                ),
               ],
             ),
           );

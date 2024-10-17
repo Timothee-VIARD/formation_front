@@ -10,9 +10,11 @@ class RoomsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return RawGestureDetector(
       gestures: <Type, GestureRecognizerFactory>{
-        MouseBackRecognizer: GestureRecognizerFactoryWithHandlers<MouseBackRecognizer>(
-              () => MouseBackRecognizer(),
-              (instance) => instance.onTapUp = (details) => handleMouseBackButton(context),
+        MouseBackRecognizer:
+            GestureRecognizerFactoryWithHandlers<MouseBackRecognizer>(
+          () => MouseBackRecognizer(),
+          (instance) =>
+              instance.onTapUp = (details) => handleMouseBackButton(context),
         ),
       },
       child: const Rooms(),
