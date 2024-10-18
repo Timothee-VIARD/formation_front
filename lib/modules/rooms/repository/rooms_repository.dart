@@ -1,31 +1,38 @@
+import 'package:formation_front/modules/rooms/model/room_model.dart';
+
 import '../../../utils/api/api_service.dart';
 
 class RoomsRepository {
-  final ApiService apiService;
+  final ApiService apiService = ApiService();
 
-  RoomsRepository({required this.apiService});
+  RoomsRepository();
 
-  Future<dynamic> getRooms() async {
-    return await apiService.get('/salles');
+  Future<List<Room>> getRooms() async {
+    final List<dynamic> response = await apiService.get('/salles');
+    return response.map((room) => Room.fromJson(room)).toList();
   }
 
-  Future<dynamic> getRoomById(int id) async {
-    return await apiService.get('/salles/$id');
+  Future<Room> getRoomById(int id) async {
+    final Map<String, dynamic> response = await apiService.get('/salles/$id');
+    return Room.fromJson(response);
   }
 
-  Future<dynamic> getRoomByName(int name) async {
-    return await apiService.get('/salles/nom/$name');
+  Future<Room> getRoomByName(int name) async {
+    final Map<String, dynamic> response =
+        await apiService.get('/salles/nom/$name');
+    return Room.fromJson(response);
   }
 
   Future<dynamic> createRoom(Map<String, dynamic> data) async {
-    return await apiService.post('/salles', data);
+    final response = await apiService.post('/salles/', data);
+    return response['id'];
   }
 
-  Future<dynamic> deleteRoomById(int id) async {
+  Future<void> deleteRoomById(int id) async {
     return await apiService.delete('/salles/$id');
   }
 
-  Future<dynamic> deleteRoomByName(int name) async {
+  Future<void> deleteRoomByName(int name) async {
     return await apiService.delete('/salles/nom/$name');
   }
 }

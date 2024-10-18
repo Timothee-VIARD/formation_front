@@ -40,7 +40,7 @@ class Home extends StatelessWidget {
                   onPressed: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const RoomsPage(),
+                      builder: (context) => RoomsPage(),
                     ),
                   ),
                   child: Text(AppLocalizations.of(context)!.rooms),
