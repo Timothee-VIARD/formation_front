@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../i18n/strings.g.dart';
 import '../controllers/cubit.dart';
 import '../controllers/state.dart';
 
@@ -13,7 +13,7 @@ class UsersTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (state is UsersInitial) {
-      return Text(AppLocalizations.of(context)!.users_reload_alert);
+      return Text(t.users.reload.alert);
     } else if (state is UsersLoading) {
       return const Center(child: CircularProgressIndicator());
     } else if (state is UsersLoadSuccess) {
@@ -31,17 +31,16 @@ class UsersTable extends StatelessWidget {
                 columnSpacing: 10,
                 columns: [
                   DataColumn(
-                    label: Text(AppLocalizations.of(context)!.users_data_id),
+                    label: Text(t.users.data.id),
                   ),
                   DataColumn(
-                    label: Text(AppLocalizations.of(context)!.users_data_name),
+                    label: Text(t.users.data.name),
                   ),
                   DataColumn(
-                    label: Text(AppLocalizations.of(context)!.users_data_email),
+                    label: Text(t.users.data.email),
                   ),
                   DataColumn(
-                    label:
-                        Text(AppLocalizations.of(context)!.users_data_actions),
+                    label: Text(t.users.data.actions),
                   ),
                 ],
                 rows: (state as UsersLoadSuccess).users.map<DataRow>((user) {
@@ -82,8 +81,7 @@ class UsersTable extends StatelessWidget {
         },
       );
     } else if (state is UsersLoadError) {
-      return Center(
-          child: Text(AppLocalizations.of(context)!.users_reload_error));
+      return Center(child: Text(t.users.reload.error));
     }
     return const Text('Error');
   }

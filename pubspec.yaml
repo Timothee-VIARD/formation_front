@@ -41,6 +41,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: any
+  slang: ^3.32.0
+  slang_flutter: ^3.32.0
 
 dev_dependencies:
   flutter_test:

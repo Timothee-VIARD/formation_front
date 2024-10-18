@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formation_front/modules/rooms/controllers/cubit.dart';
 import 'package:formation_front/modules/rooms/controllers/state.dart';
 import 'package:formation_front/modules/rooms/widgets/create_room_dialog.dart';
 import 'package:formation_front/modules/rooms/widgets/rooms_table.dart';
+
+import '../../../i18n/strings.g.dart';
 
 class RoomsView extends StatefulWidget {
   const RoomsView({super.key});
@@ -36,7 +37,7 @@ class _RoomsViewState extends State<RoomsView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.rooms),
+        title: Text(t.rooms.title),
         forceMaterialTransparency: true,
       ),
       body: Center(
@@ -51,7 +52,7 @@ class _RoomsViewState extends State<RoomsView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      AppLocalizations.of(context)!.rooms_list,
+                      t.rooms.list,
                       style: const TextStyle(fontSize: 24),
                     ),
                     const SizedBox(width: 5),
@@ -74,7 +75,7 @@ class _RoomsViewState extends State<RoomsView> {
                 ElevatedButton(
                   onPressed: () => _showCreateRoomDialog(context),
                   child: Text(
-                    AppLocalizations.of(context)!.room_create,
+                    t.rooms.room.title,
                     style: const TextStyle(fontSize: 16),
                   ),
                 ),

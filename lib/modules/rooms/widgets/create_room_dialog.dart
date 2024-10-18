@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../i18n/strings.g.dart';
 import '../controllers/cubit.dart';
 
 class CreateRoomDialog extends StatefulWidget {
@@ -57,7 +57,7 @@ class CreateRoomDialogState extends State<CreateRoomDialog> {
               children: [
                 Center(
                   child: Text(
-                    AppLocalizations.of(context)!.room_create_alert,
+                    t.rooms.room.alert,
                     style: const TextStyle(
                         fontSize: 20, fontWeight: FontWeight.bold),
                   ),
@@ -71,13 +71,11 @@ class CreateRoomDialogState extends State<CreateRoomDialog> {
                       TextFormField(
                         controller: _nameController,
                         decoration: InputDecoration(
-                          labelText:
-                          AppLocalizations.of(context)!.room_create_name,
+                          labelText: t.rooms.room.name,
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return AppLocalizations.of(context)!
-                                .room_create_name_hint;
+                            return t.rooms.room.name_hint;
                           }
                           return null;
                         },
@@ -86,13 +84,11 @@ class CreateRoomDialogState extends State<CreateRoomDialog> {
                       TextFormField(
                         controller: _emailController,
                         decoration: InputDecoration(
-                          labelText:
-                          AppLocalizations.of(context)!.room_create_capacity,
+                          labelText: t.rooms.room.capacity,
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return AppLocalizations.of(context)!
-                                .room_create_capacity_hint;
+                            return t.rooms.room.capacity_hint;
                           }
                           return null;
                         },
@@ -107,7 +103,7 @@ class CreateRoomDialogState extends State<CreateRoomDialog> {
                   child: SizedBox(
                     width: double.infinity,
                     child: Text(
-                      AppLocalizations.of(context)!.room_create_confirm,
+                      t.rooms.room.confirm,
                       textAlign: TextAlign.center,
                     ),
                   ),

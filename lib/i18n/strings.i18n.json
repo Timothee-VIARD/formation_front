@@ -1,0 +1,59 @@
+{
+  "app_title": "Gestion de réunion",
+  "users": {
+    "title": "Utilisateurs",
+    "list": "Liste des utilisateurs",
+    "reload": {
+      "title": "Recharger les utilisateurs",
+      "alert": "Chargez les utilisateurs",
+      "error": "Erreur lors du chargement des utilisateurs"
+    },
+    "data": {
+      "id": "Id",
+      "name": "Nom",
+      "email": "Email",
+      "actions": "Actions"
+    },
+    "user": {
+      "title": "Ajouter un nouvel utilisateur",
+      "alert": "Créer un utilisateur",
+      "name": "Nom",
+      "name_error": "Le nom est obligatoire",
+      "name_hint": "Entrez le nom",
+      "email": "Email",
+      "email_error": "L'email est obligatoire",
+      "email_hint": "Entrez l'email",
+      "password": "Mot de passe",
+      "password_error": "Le mot de passe est obligatoire",
+      "password_hint": "Entrez le mot de passe",
+      "confirm": "Confirmer la création ?"
+    }
+  },
+  "rooms": {
+    "title": "Salles",
+    "list": "Liste des salles",
+    "reload": {
+      "title": "Recharger les salles",
+      "alert": "Chargez les salles",
+      "error": "Erreur lors du chargement des salles"
+    },
+    "data": {
+      "id": "Id",
+      "name": "Nom",
+      "capacity": "Capacité",
+      "actions": "Actions"
+    },
+    "room": {
+      "title": "Ajouter une nouvelle salle",
+      "alert": "Créer une salle",
+      "name": "Nom",
+      "name_error": "Le nom est obligatoire",
+      "name_hint": "Entrez le nom",
+      "capacity": "Capacité",
+      "capacity_error": "La capacité est obligatoire",
+      "capacity_hint": "Entrez la capacité",
+      "confirm": "Confirmer la création ?"
+    }
+  },
+  "meetings": "Réunions"
+}

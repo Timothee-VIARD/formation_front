@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formation_front/modules/users/controllers/state.dart';
 
+import '../../../i18n/strings.g.dart';
 import '../controllers/cubit.dart';
 import 'create_user_dialog.dart';
 import 'users_table.dart';
@@ -37,7 +37,7 @@ class UsersViewState extends State<UsersView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.users),
+        title: Text(t.users.title),
         forceMaterialTransparency: true,
       ),
       body: Center(
@@ -52,7 +52,7 @@ class UsersViewState extends State<UsersView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      AppLocalizations.of(context)!.users_list,
+                      t.users.list,
                       style: const TextStyle(fontSize: 24),
                     ),
                     const SizedBox(width: 5),
@@ -75,7 +75,7 @@ class UsersViewState extends State<UsersView> {
                 ElevatedButton(
                   onPressed: () => _showCreateUserDialog(context),
                   child: Text(
-                    AppLocalizations.of(context)!.user_create,
+                    t.users.user.title,
                     style: const TextStyle(fontSize: 16),
                   ),
                 ),

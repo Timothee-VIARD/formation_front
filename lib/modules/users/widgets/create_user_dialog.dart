@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../../i18n/strings.g.dart';
 import '../controllers/cubit.dart';
 
 class CreateUserDialog extends StatefulWidget {
@@ -60,7 +60,7 @@ class CreateUserDialogState extends State<CreateUserDialog> {
               children: [
                 Center(
                   child: Text(
-                    AppLocalizations.of(context)!.user_create_alert,
+                    t.users.user.alert,
                     style: const TextStyle(
                         fontSize: 20, fontWeight: FontWeight.bold),
                   ),
@@ -74,13 +74,11 @@ class CreateUserDialogState extends State<CreateUserDialog> {
                       TextFormField(
                         controller: _nameController,
                         decoration: InputDecoration(
-                          labelText:
-                              AppLocalizations.of(context)!.user_create_name,
+                          labelText: t.users.user.name,
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return AppLocalizations.of(context)!
-                                .user_create_name_hint;
+                            return t.users.user.name_hint;
                           }
                           return null;
                         },
@@ -89,13 +87,11 @@ class CreateUserDialogState extends State<CreateUserDialog> {
                       TextFormField(
                         controller: _emailController,
                         decoration: InputDecoration(
-                          labelText:
-                              AppLocalizations.of(context)!.user_create_email,
+                          labelText: t.users.user.email,
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return AppLocalizations.of(context)!
-                                .user_create_email_hint;
+                            return t.users.user.email_hint;
                           }
                           return null;
                         },
@@ -104,13 +100,11 @@ class CreateUserDialogState extends State<CreateUserDialog> {
                       TextFormField(
                         controller: _passwordController,
                         decoration: InputDecoration(
-                          labelText: AppLocalizations.of(context)!
-                              .user_create_password,
+                          labelText: t.users.user.password,
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return AppLocalizations.of(context)!
-                                .user_create_password_hint;
+                            return t.users.user.password_hint;
                           }
                           return null;
                         },
@@ -125,7 +119,7 @@ class CreateUserDialogState extends State<CreateUserDialog> {
                   child: SizedBox(
                     width: double.infinity,
                     child: Text(
-                      AppLocalizations.of(context)!.user_create_confirm,
+                      t.users.user.confirm,
                       textAlign: TextAlign.center,
                     ),
                   ),

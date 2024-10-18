@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../../../i18n/strings.g.dart';
 
 class Meetings extends StatelessWidget {
   const Meetings({super.key});
@@ -8,10 +9,10 @@ class Meetings extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.meetings),
+        title: Text(t.meetings),
       ),
       body: Center(
-        child: Text(AppLocalizations.of(context)!.meetings),
+        child: Text(t.meetings),
       ),
     );
   }
