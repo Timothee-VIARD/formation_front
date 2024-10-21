@@ -16,16 +16,21 @@ class ApiService {
     }
   }
 
-  Future<dynamic> post(String endpoint, Map<String, dynamic> data) async {
+  Future<dynamic> post(
+      String endpoint, Map<String, dynamic> data, bool isEncoded) async {
     final response = await http.post(
       Uri.parse('$baseUrl$endpoint'),
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode(data),
+      headers: {
+        'Content-Type':
+            isEncoded ? 'application/x-www-form-urlencoded' : 'application/json'
+      },
+      body: isEncoded ? data : json.encode(data),
     );
-    if (response.statusCode == 201) {
+    if (response.statusCode == 200 || response.statusCode == 201) {
       return json.decode(response.body);
     } else {
-      throw Exception('Failed to post data');
+      final detail = json.decode(response.body)['detail'];
+      throw Exception(detail);
     }
   }
 

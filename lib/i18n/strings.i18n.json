@@ -1,5 +1,13 @@
 {
   "app_title": "Gestion de réunion",
+  "login": {
+    "title": "Connexion",
+    "username": "Nom d'utilisateur",
+    "username_hint": "Entrez le nom d'utilisateur",
+    "password": "Mot de passe",
+    "password_hint": "Entrez le mot de passe",
+    "login": "Se connecter"
+  },
   "users": {
     "title": "Utilisateurs",
     "list": "Liste des utilisateurs",

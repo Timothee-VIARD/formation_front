@@ -17,7 +17,7 @@ class AppBlocObserver extends BlocObserver {
     super.onChange(bloc, change);
     print('${bloc.runtimeType} $change');
 
-    if (bloc is NotificationCubit) {
+    if (bloc is NotificationCubit && change.nextState is! NotificationInitial) {
       scaffoldMessengerKey.currentState?.hideCurrentSnackBar();
       scaffoldMessengerKey.currentState?.showSnackBar(
         SnackBarPage(

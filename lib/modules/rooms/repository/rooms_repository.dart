@@ -24,7 +24,7 @@ class RoomsRepository {
   }
 
   Future<dynamic> createRoom(Map<String, dynamic> data) async {
-    final response = await apiService.post('/salles/', data);
+    final response = await apiService.post('/salles/', data, false);
     return response['id'];
   }
 

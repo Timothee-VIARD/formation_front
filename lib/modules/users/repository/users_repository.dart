@@ -24,7 +24,7 @@ class UsersRepository {
   }
 
   Future<int> createUser(Map<String, dynamic> data) async {
-    final response = await apiService.post('/utilisateurs/', data);
+    final response = await apiService.post('/utilisateurs/', data, false);
     return response['id'];
   }
 

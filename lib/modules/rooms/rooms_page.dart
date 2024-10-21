@@ -24,8 +24,7 @@ class RoomsPage extends StatelessWidget {
         ),
       },
       child: BlocProvider(
-          create: (context) =>
-              RoomsCubit(
+          create: (context) => RoomsCubit(
                 roomsRepository,
                 BlocProvider.of<NotificationCubit>(context),
               ),

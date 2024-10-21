@@ -14,9 +14,6 @@ class SnackBarPage {
   SnackBarPage({required this.title, required this.level});
 
   SnackBar build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final horizontalMargin = screenWidth * 0.3;
-
     return SnackBar(
       duration: const Duration(seconds: 2),
       content: Text(title),
@@ -29,7 +26,7 @@ class SnackBarPage {
                   ? Colors.green
                   : Colors.blue,
       behavior: SnackBarBehavior.floating,
-      margin: EdgeInsets.symmetric(horizontal: horizontalMargin, vertical: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),

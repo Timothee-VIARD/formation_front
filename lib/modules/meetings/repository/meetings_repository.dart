@@ -18,7 +18,7 @@ class MeetingsRepository {
   }
 
   Future createMeeting(Map<String, dynamic> data) async {
-    return await apiService.post('/meetings', data);
+    return await apiService.post('/meetings', data, false);
   }
 
   Future deleteMeetingById(int id) async {

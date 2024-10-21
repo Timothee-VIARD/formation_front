@@ -7,10 +7,12 @@ class NotificationCubit extends Cubit<NotificationState> {
 
   void showSuccess(String message) {
     emit(NotificationSuccess(message));
+    clear();
   }
 
   void showError(String message) {
     emit(NotificationError(message));
+    clear();
   }
 
   void clear() {
