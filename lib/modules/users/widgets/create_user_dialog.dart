@@ -50,13 +50,15 @@ class CreateUserDialogState extends State<CreateUserDialog> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
-      insetPadding: EdgeInsets.symmetric(
-          horizontal: horizontalPadding, vertical: verticalPadding),
+      insetPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: Stack(
         children: [
           Container(
             padding: const EdgeInsets.all(40.0),
+            width: 420,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Center(
                   child: Text(
@@ -112,8 +114,7 @@ class CreateUserDialogState extends State<CreateUserDialog> {
                     ],
                   ),
                 ),
-                const Expanded(child: SizedBox(height: 0)),
-                const SizedBox(height: 10),
+                const SizedBox(height: 80),
                 ElevatedButton(
                   onPressed: _createUser,
                   child: SizedBox(

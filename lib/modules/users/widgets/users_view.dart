@@ -41,9 +41,9 @@ class UsersViewState extends State<UsersView> {
         forceMaterialTransparency: true,
       ),
       body: Center(
-        child: FractionallySizedBox(
-          widthFactor: 2 / 3,
-          heightFactor: 5 / 6,
+        child: Container(
+          width: 1200,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 70),
           child: BlocBuilder<UsersCubit, UsersState>(builder: (context, state) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -51,9 +51,12 @@ class UsersViewState extends State<UsersView> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      t.users.list,
-                      style: const TextStyle(fontSize: 24),
+                    Flexible(
+                      child: Text(
+                        t.users.list,
+                        style: const TextStyle(fontSize: 24),
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                     const SizedBox(width: 5),
                     Center(
@@ -77,6 +80,7 @@ class UsersViewState extends State<UsersView> {
                   child: Text(
                     t.users.user.title,
                     style: const TextStyle(fontSize: 16),
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ],

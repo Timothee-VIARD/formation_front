@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -38,22 +36,19 @@ class CreateRoomDialogState extends State<CreateRoomDialog> {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-    final horizontalPadding = pow(screenWidth / 10, 2) * 0.0225;
-    final verticalPadding = pow(screenHeight / 10, 2) * 0.03;
-
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
-      insetPadding: EdgeInsets.symmetric(
-          horizontal: horizontalPadding, vertical: verticalPadding),
+      insetPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: Stack(
         children: [
           Container(
             padding: const EdgeInsets.all(40.0),
+            width: 420,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Center(
                   child: Text(
@@ -96,8 +91,7 @@ class CreateRoomDialogState extends State<CreateRoomDialog> {
                     ],
                   ),
                 ),
-                const Expanded(child: SizedBox(height: 0)),
-                const SizedBox(height: 10),
+                const SizedBox(height: 80),
                 ElevatedButton(
                   onPressed: _createUser,
                   child: SizedBox(
