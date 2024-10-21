@@ -32,7 +32,7 @@ class UsersRepository {
     await apiService.delete('/utilisateurs/$id');
   }
 
-  Future<void> deleteUserByName(int name) async {
+  Future<void> deleteUserByName(String name) async {
     await apiService.delete('/utilisateurs/username/$name');
   }
 }

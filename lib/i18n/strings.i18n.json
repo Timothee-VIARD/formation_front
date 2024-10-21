@@ -2,8 +2,8 @@
   "app_title": "Gestion de réunion",
   "login": {
     "title": "Connexion",
-    "username": "Nom d'utilisateur",
-    "username_hint": "Entrez le nom d'utilisateur",
+    "email": "Email",
+    "email_hint": "Entrez l'email",
     "password": "Mot de passe",
     "password_hint": "Entrez le mot de passe",
     "login": "Se connecter"

@@ -14,12 +14,12 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   final _formKey = GlobalKey<FormState>();
-  final _usernameController = TextEditingController();
+  final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   @override
   void dispose() {
-    _usernameController.dispose();
+    _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -27,7 +27,7 @@ class _LoginViewState extends State<LoginView> {
   void _login() {
     if (_formKey.currentState!.validate()) {
       final login = Login(
-        username: _usernameController.text,
+        email: _emailController.text,
         password: _passwordController.text,
       );
       context.read<LoginCubit>().login(login);
@@ -59,13 +59,13 @@ class _LoginViewState extends State<LoginView> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     TextFormField(
-                      controller: _usernameController,
+                      controller: _emailController,
                       decoration: InputDecoration(
-                        labelText: t.login.username,
+                        labelText: t.login.email,
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return t.login.username_hint;
+                          return t.login.email_hint;
                         }
                         return null;
                       },

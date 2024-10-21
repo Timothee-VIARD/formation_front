@@ -81,7 +81,7 @@ class UsersTable extends StatelessWidget {
                               icon: const Icon(Icons.delete),
                               onPressed: () => context
                                   .read<UsersCubit>()
-                                  .deleteUser(user.id),
+                                  .deleteUser(user.name),
                             ),
                           ),
                         ),

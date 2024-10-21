@@ -16,7 +16,7 @@ class LoginCubit extends Cubit<LoginState> {
       emit(LoginLoading());
       final token = await repository.login(login.toJson());
       notificationCubit.showSuccess("Login successful");
-      emit(LoginSuccess(login.username, token));
+      emit(LoginSuccess(login.email, token));
     } catch (e) {
       await Future.delayed(const Duration(seconds: 2));
       notificationCubit.showError(e.toString());

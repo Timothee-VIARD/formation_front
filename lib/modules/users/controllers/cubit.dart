@@ -21,9 +21,9 @@ class UsersCubit extends Cubit<UsersState> {
     }
   }
 
-  Future<void> deleteUser(int id) async {
+  Future<void> deleteUser(String name) async {
     try {
-      await repository.deleteUserById(id);
+      await repository.deleteUserByName(name);
       notificationCubit.showSuccess('User deleted successfully');
       emit(UsersLoadSuccess(await repository.getUsers()));
     } catch (e) {

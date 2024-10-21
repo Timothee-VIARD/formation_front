@@ -10,7 +10,7 @@ class ApiService {
   Future<dynamic> get(String endpoint) async {
     final response = await http.get(Uri.parse('$baseUrl$endpoint'));
     if (response.statusCode == 200) {
-      return json.decode(response.body);
+      return json.decode(utf8.decode(response.bodyBytes));
     } else {
       throw Exception('Failed to load data');
     }
@@ -22,7 +22,7 @@ class ApiService {
       Uri.parse('$baseUrl$endpoint'),
       headers: {
         'Content-Type':
-            isEncoded ? 'application/x-www-form-urlencoded' : 'application/json'
+            isEncoded ? 'application/x-www-form-urlencoded; charset=utf-8' : 'application/json'
       },
       body: isEncoded ? data : json.encode(data),
     );
