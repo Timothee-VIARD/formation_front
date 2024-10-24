@@ -24,4 +24,11 @@ final ThemeData appTheme = ThemeData(
       borderRadius: BorderRadius.all(Radius.circular(20)),
     ),
   ),
+  cardTheme: const CardTheme(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(10)),
+    ),
+    color: Color(0xFFF5F5F5),
+    elevation: 5,
+  ),
 );

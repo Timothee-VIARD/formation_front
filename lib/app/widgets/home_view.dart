@@ -42,7 +42,6 @@ class NavigationHome extends StatelessWidget {
                   alignment: WrapAlignment.center,
                   runAlignment: WrapAlignment.center,
                   direction: Axis.horizontal,
-              
                   spacing: 80,
                   runSpacing: 40,
                   children: [
@@ -76,10 +75,10 @@ class NavigationHome extends StatelessWidget {
                       onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const MeetingsPage(),
+                          builder: (context) => MeetingsPage(),
                         ),
                       ),
-                      child: Text(t.meetings),
+                      child: Text(t.meetings.title),
                     ),
                   ],
                 ),

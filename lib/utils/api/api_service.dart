@@ -17,12 +17,16 @@ class ApiService {
   }
 
   Future<dynamic> post(
-      String endpoint, Map<String, dynamic> data, bool isEncoded) async {
+      String endpoint, Map<String, dynamic> data, bool isEncoded,
+      [String? token]) async {
+    final headers = token != null ? {'Authorization': 'Bearer $token'} : null;
     final response = await http.post(
       Uri.parse('$baseUrl$endpoint'),
       headers: {
-        'Content-Type':
-            isEncoded ? 'application/x-www-form-urlencoded; charset=utf-8' : 'application/json'
+        'Content-Type': isEncoded
+            ? 'application/x-www-form-urlencoded; charset=utf-8'
+            : 'application/json',
+        ...?headers,
       },
       body: isEncoded ? data : json.encode(data),
     );
@@ -34,8 +38,12 @@ class ApiService {
     }
   }
 
-  Future<dynamic> delete(String endpoint) async {
-    final response = await http.delete(Uri.parse('$baseUrl$endpoint'));
+  Future<dynamic> delete(String endpoint, [String? token]) async {
+    final headers = token != null ? {'Authorization': 'Bearer $token'} : null;
+    final response = await http.delete(
+      Uri.parse('$baseUrl$endpoint'),
+      headers: headers,
+    );
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {

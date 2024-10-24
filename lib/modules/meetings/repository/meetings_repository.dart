@@ -1,31 +1,25 @@
+import 'package:formation_front/modules/meetings/model/meeting_answer_model.dart';
+import 'package:formation_front/modules/meetings/model/meeting_model.dart';
+
 import '../../../utils/api/api_service.dart';
 
 class MeetingsRepository {
-  final ApiService apiService;
+  final ApiService apiService = ApiService();
 
-  MeetingsRepository({required this.apiService});
+  MeetingsRepository();
 
-  Future getMeetings() async {
-    return await apiService.get('/meetings');
+  Future<List<MeetingAnswer>> getMeetings() async {
+    final List<dynamic> response = await apiService.get('/reunions/');
+    return response.map((meeting) => MeetingAnswer.fromJson(meeting)).toList();
   }
 
-  Future getMeetingById(int id) async {
-    return await apiService.get('/meetings/$id');
+  Future createMeeting(Meeting data, String token) async {
+    final response =
+        await apiService.post('/reunions/', data.toJson(), false, token);
+    return response['id'];
   }
 
-  Future getMeetingByName(int name) async {
-    return await apiService.get('/meetings/name/$name');
-  }
-
-  Future createMeeting(Map<String, dynamic> data) async {
-    return await apiService.post('/meetings', data, false);
-  }
-
-  Future deleteMeetingById(int id) async {
-    return await apiService.delete('/meetings/$id');
-  }
-
-  Future deleteMeetingByName(int name) async {
-    return await apiService.delete('/meetings/name/$name');
+  Future deleteMeetingById(int id, String token) async {
+    return await apiService.delete('/reunions/$id', token);
   }
 }

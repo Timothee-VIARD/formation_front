@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:formation_front/modules/meetings/widgets/meetings.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formation_front/modules/common/alert/controllers/cubit.dart';
+import 'package:formation_front/modules/meetings/controllers/cubit.dart';
+import 'package:formation_front/modules/meetings/widgets/meetings_view.dart';
 
 import '../../utils/mouse_back_detector.dart';
+import 'repository/meetings_repository.dart';
 
 class MeetingsPage extends StatelessWidget {
-  const MeetingsPage({super.key});
+  MeetingsPage({super.key});
+
+  final MeetingsRepository repository = MeetingsRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +23,12 @@ class MeetingsPage extends StatelessWidget {
               instance.onTapUp = (details) => handleMouseBackButton(context),
         ),
       },
-      child: const Meetings(),
+      child: BlocProvider(
+          create: (context) => MeetingsCubit(
+                repository,
+                BlocProvider.of<NotificationCubit>(context),
+              ),
+          child: const MeetingsView()),
     );
   }
 }

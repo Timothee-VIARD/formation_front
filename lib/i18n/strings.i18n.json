@@ -63,5 +63,38 @@
       "confirm": "Confirmer la création ?"
     }
   },
-  "meetings": "Réunions"
+  "meetings": {
+    "title": "Réunions",
+    "list": "Liste des réunions",
+    "showHistory": "Afficher l'historique",
+    "hideHistory": "Masquer l'historique",
+    "reload": {
+      "title": "Recharger les réunions",
+      "alert": "Chargez les réunions",
+      "error": "Erreur lors du chargement des réunions"
+    },
+    "data": {
+      "state": "Etat :",
+      "title": "Réunion le ",
+      "at": "De ",
+      "to": " à ",
+      "room": "Salle numéro : ",
+      "nbUsers": "Nombre de participants :",
+      "delete": "Supprimer"
+    },
+    "meeting": {
+      "title": "Ajouter une nouvelle réunion",
+      "date": "Date",
+      "date_hint": "Entrez la date",
+      "time": "Heure",
+      "time_hint": "Entrez l'heure",
+      "duration": "Durée",
+      "duration_hint": "Entrez la durée",
+      "room": "Salle",
+      "room_hint": "Entrez la salle",
+      "nbUsers": "Nombre de participants",
+      "nbUsers_hint": "Entrez le nombre de participants",
+      "confirm": "Confirmer la création ?"
+    }
+  }
 }
