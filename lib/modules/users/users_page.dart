@@ -4,7 +4,7 @@ import 'package:formation_front/modules/users/controllers/cubit.dart';
 import 'package:formation_front/modules/users/repository/users_repository.dart';
 
 import '../../utils/mouse_back_detector.dart';
-import '../common/alert/controllers/cubit.dart';
+import '../common/snackBar/controllers/cubit.dart';
 import 'widgets/users_view.dart';
 
 class UsersPage extends StatelessWidget {

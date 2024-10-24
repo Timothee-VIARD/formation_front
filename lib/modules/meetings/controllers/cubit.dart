@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formation_front/modules/meetings/controllers/state.dart';
 
-import '../../common/alert/controllers/cubit.dart';
+import '../../common/snackBar/controllers/cubit.dart';
 import '../model/meeting_model.dart';
 import '../repository/meetings_repository.dart';
 

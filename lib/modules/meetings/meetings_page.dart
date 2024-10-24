@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:formation_front/modules/common/alert/controllers/cubit.dart';
+import 'package:formation_front/modules/common/snackBar/controllers/cubit.dart';
 import 'package:formation_front/modules/meetings/controllers/cubit.dart';
 import 'package:formation_front/modules/meetings/widgets/meetings_view.dart';
 
