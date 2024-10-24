@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,10 +39,6 @@ class CreateUserDialogState extends State<CreateUserDialog> {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-    final horizontalPadding = pow(screenWidth / 10, 2) * 0.0225;
-    final verticalPadding = pow(screenHeight / 10, 2) * 0.03;
 
     return Dialog(
       shape: RoundedRectangleBorder(
