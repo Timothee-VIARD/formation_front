@@ -26,6 +26,7 @@ class _MeetingsViewState extends State<MeetingsView> {
   void _showCreateMeetingDialog(BuildContext context) {
     showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (BuildContext dialogContext) {
         return BlocProvider.value(
           value: BlocProvider.of<MeetingsCubit>(context),

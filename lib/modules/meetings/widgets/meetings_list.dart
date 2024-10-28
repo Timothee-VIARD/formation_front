@@ -35,10 +35,7 @@ class MeetingsList extends StatelessWidget {
       case MeetingsLoading():
         return const Center(child: CircularProgressIndicator());
       case MeetingsLoadSuccess():
-        int crossAxisCount = MediaQuery.of(context).size.width ~/ 300;
-        if (crossAxisCount < 1) {
-          crossAxisCount = 1;
-        }
+      int crossAxisCount = (MediaQuery.of(context).size.width ~/ 300).clamp(1, 5);
         return AlignedGridView.count(
           crossAxisCount: crossAxisCount,
           mainAxisSpacing: 8,

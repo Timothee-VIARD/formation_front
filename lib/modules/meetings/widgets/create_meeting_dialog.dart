@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formation_front/modules/common/customDatePicker/custom_date_picker.dart';
 import 'package:formation_front/modules/meetings/model/meeting_model.dart';
 import 'package:formation_front/utils/dateTime/date_time.dart';
 import 'package:intl/intl.dart';
@@ -7,6 +9,7 @@ import 'package:intl/intl.dart';
 import '../../../app/controllers/login_cubit.dart';
 import '../../../app/controllers/login_state.dart';
 import '../../../i18n/strings.g.dart';
+import '../../common/timeInputField/time_input_field.dart';
 import '../controllers/cubit.dart';
 
 class CreateMeetingDialog extends StatefulWidget {
@@ -18,11 +21,21 @@ class CreateMeetingDialog extends StatefulWidget {
 
 class CreateMeetingDialogState extends State<CreateMeetingDialog> {
   final _formKey = GlobalKey<FormState>();
-  final _dateController = TextEditingController();
-  final _timeController = TextEditingController();
-  final _durationController = TextEditingController();
-  final _peopleNbController = TextEditingController();
-  final _roomIdController = TextEditingController();
+  late TextEditingController _dateController;
+  late TextEditingController _timeController;
+  late TextEditingController _durationController;
+  late TextEditingController _peopleNbController;
+  late TextEditingController _roomIdController;
+
+  @override
+  void initState() {
+    super.initState();
+    _dateController = TextEditingController();
+    _timeController = TextEditingController();
+    _durationController = TextEditingController();
+    _peopleNbController = TextEditingController();
+    _roomIdController = TextEditingController();
+  }
 
   @override
   void dispose() {
@@ -53,25 +66,33 @@ class CreateMeetingDialogState extends State<CreateMeetingDialog> {
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
+      locale: const Locale('fr', 'FR'),
       initialDate: DateTime.now(),
       firstDate: DateTime(2000),
       lastDate: DateTime(2100),
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
+      builder: (context, child) {
+        return Theme(
+          data: ThemeData(
+            useMaterial3: false,
+            dialogTheme: DialogTheme(
+              shape: RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadius.circular(20), // Set the border radius here
+              ),
+            ),
+            colorScheme: const ColorScheme.light(
+              primary: Color(0xFF494949),
+              onSurface: Colors.black,
+            ),
+          ),
+          child: child!,
+        );
+      },
     );
     if (picked != null) {
       setState(() {
         _dateController.text = DateFormat('dd/MM/yyyy').format(picked);
-      });
-    }
-  }
-
-  Future<void> _selectTime(BuildContext context) async {
-    final TimeOfDay? picked = await showTimePicker(
-      context: context,
-      initialTime: TimeOfDay.now(),
-    );
-    if (picked != null) {
-      setState(() {
-        _timeController.text = picked.format(context);
       });
     }
   }
@@ -115,6 +136,10 @@ class CreateMeetingDialogState extends State<CreateMeetingDialog> {
     );
   }
 
+  bool _isOnMobile(BuildContext context) {
+    return MediaQuery.of(context).size.width < 600;
+  }
+
   final Center _dialogTitle = Center(
     child: Text(
       t.meetings.meeting.title,
@@ -127,38 +152,32 @@ class CreateMeetingDialogState extends State<CreateMeetingDialog> {
     child: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        TextFormField(
-          controller: _dateController,
-          onTap: () => _selectDate(context),
-          readOnly: true,
-          decoration: InputDecoration(
-            labelText: t.meetings.meeting.date,
-            suffixIcon: const Icon(Icons.calendar_today),
-          ),
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return t.meetings.meeting.date_hint;
-            }
-            return null;
-          },
-        ),
-        TextFormField(
-          controller: _timeController,
-          onTap: () => _selectTime(context),
-          readOnly: true,
-          decoration: InputDecoration(
-            labelText: t.meetings.meeting.time,
-            suffixIcon: const Icon(Icons.more_time),
-          ),
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return t.meetings.meeting.time_hint;
-            }
-            return null;
-          },
-        ),
+        _isOnMobile(context)
+            ? TextFormField(
+                controller: _dateController,
+                onTap: () => _selectDate(context),
+                readOnly: true,
+                decoration: InputDecoration(
+                  labelText: t.meetings.meeting.date,
+                  suffixIcon: const Icon(Icons.calendar_today),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return t.meetings.meeting.date_hint;
+                  }
+                  return null;
+                },
+              )
+            : CustomCalendarDatePicker(
+                controller: _dateController,
+              ),
+        TimeInputField(controller: _timeController),
         TextFormField(
           controller: _durationController,
+          inputFormatters: [
+            FilteringTextInputFormatter.digitsOnly,
+          ],
+          keyboardType: TextInputType.number,
           decoration: InputDecoration(
             labelText: t.meetings.meeting.duration,
           ),
@@ -171,6 +190,10 @@ class CreateMeetingDialogState extends State<CreateMeetingDialog> {
         ),
         TextFormField(
           controller: _peopleNbController,
+          inputFormatters: [
+            FilteringTextInputFormatter.digitsOnly,
+          ],
+          keyboardType: TextInputType.number,
           decoration: InputDecoration(
             labelText: t.meetings.meeting.nbUsers,
           ),
