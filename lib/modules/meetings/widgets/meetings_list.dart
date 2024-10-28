@@ -3,15 +3,17 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:formation_front/modules/meetings/controllers/state.dart';
 import 'package:formation_front/modules/meetings/model/meeting_answer_model.dart';
 import 'package:formation_front/modules/meetings/widgets/meeting_card.dart';
+import 'package:formation_front/modules/rooms/model/room_model.dart';
 
 import '../../../utils/dateTime/date_time.dart';
 
 class MeetingsList extends StatelessWidget {
   final MeetingsState state;
   final bool showPastMeetings;
+  final Future<List<Room>> rooms;
 
   const MeetingsList(
-      {super.key, required this.state, required this.showPastMeetings});
+      {super.key, required this.state, required this.showPastMeetings, required this.rooms});
 
   _getMeetings() {
     List<MeetingAnswer> meetings =
@@ -43,7 +45,7 @@ class MeetingsList extends StatelessWidget {
           itemCount: _getMeetings().length,
           itemBuilder: (context, index) {
             final meeting = _getMeetings()[index];
-            return MeetingCard(meeting: meeting);
+            return MeetingCard(meeting: meeting, rooms: rooms);
           },
         );
       default:

@@ -18,7 +18,8 @@ import '../model/meeting_answer_model.dart';
 import 'dropdown_widget.dart';
 
 class CreateMeetingDialog extends StatefulWidget {
-  const CreateMeetingDialog({super.key});
+  final Future<List<Room>> rooms;
+  const CreateMeetingDialog({super.key, required this.rooms});
 
   @override
   CreateMeetingDialogState createState() => CreateMeetingDialogState();
@@ -255,6 +256,7 @@ class CreateMeetingDialogState extends State<CreateMeetingDialog> {
           },
         ),
         DropdownWidget(
+          rooms: widget.rooms,
           roomNameController: _roomNameController,
           peopleNbController: _peopleNbController,
           onRoomChanged: onRoomChange,

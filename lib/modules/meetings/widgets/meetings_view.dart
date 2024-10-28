@@ -6,6 +6,8 @@ import 'package:formation_front/modules/meetings/widgets/create_meeting_dialog.d
 import 'package:formation_front/modules/meetings/widgets/meetings_list.dart';
 
 import '../../../i18n/strings.g.dart';
+import '../../../utils/api/api_service.dart';
+import '../../rooms/model/room_model.dart';
 
 class MeetingsView extends StatefulWidget {
   const MeetingsView({super.key});
@@ -16,11 +18,25 @@ class MeetingsView extends StatefulWidget {
 
 class _MeetingsViewState extends State<MeetingsView> {
   bool showPastMeetings = false;
+  final ApiService apiService = ApiService();
+  late Future<List<Room>> rooms;
 
   @override
   void initState() {
     super.initState();
     context.read<MeetingsCubit>().getMeetings();
+    rooms = _getRooms();
+  }
+
+  Future<List<Room>> _getRooms() {
+    Future<List<Room>> data = apiService.get('/salles').then(
+      (response) {
+        return response.map<Room>((room) {
+          return Room.fromJson(room);
+        }).toList();
+      },
+    );
+    return data;
   }
 
   void _showCreateMeetingDialog(BuildContext context) {
@@ -30,7 +46,7 @@ class _MeetingsViewState extends State<MeetingsView> {
       builder: (BuildContext dialogContext) {
         return BlocProvider.value(
           value: BlocProvider.of<MeetingsCubit>(context),
-          child: const CreateMeetingDialog(),
+          child: CreateMeetingDialog(rooms: rooms),
         );
       },
     );
@@ -60,6 +76,7 @@ class _MeetingsViewState extends State<MeetingsView> {
                       child: MeetingsList(
                         state: state,
                         showPastMeetings: showPastMeetings,
+                        rooms: rooms,
                       ),
                     ),
                   ),

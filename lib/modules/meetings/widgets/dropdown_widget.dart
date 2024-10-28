@@ -9,8 +9,11 @@ class DropdownWidget extends StatefulWidget {
   final TextEditingController peopleNbController;
   final Function(Room?) onRoomChanged;
 
+  final Future<List<Room>> rooms;
+
   const DropdownWidget({
     super.key,
+    required this.rooms,
     required this.roomNameController,
     required this.peopleNbController,
     required this.onRoomChanged,
@@ -37,17 +40,14 @@ class _DropdownWidgetState extends State<DropdownWidget> {
   }
 
   void _loadData() {
-    _data = apiService.get('/salles').then(
-      (response) {
-        return response.map<DropdownMenuItem<Room>>((room) {
-          final roomObj = Room.fromJson(room);
-          return DropdownMenuItem<Room>(
-            value: roomObj,
-            child: Text(roomObj.name),
-          );
-        }).toList();
-      },
-    );
+    _data = widget.rooms.then((rooms) {
+      return rooms.map((Room room) {
+        return DropdownMenuItem<Room>(
+          value: room,
+          child: Text(room.name),
+        );
+      }).toList();
+    });
   }
 
   bool _isRoomCapacityValid() {
@@ -98,8 +98,9 @@ class _DropdownWidgetState extends State<DropdownWidget> {
             : SizedBox(
                 width: double.infinity,
                 child: Text(
-                    '${t.meetings.meeting.error.tooMuchUsers} (max: ${dropdownValue!.nbMax})',
-                    style: TextStyle(fontSize: 12, color: dropDownColor)),
+                  '${t.meetings.meeting.error.tooMuchUsers} (max: ${dropdownValue!.nbMax})',
+                  style: TextStyle(fontSize: 12, color: dropDownColor),
+                ),
               ),
       ],
     );

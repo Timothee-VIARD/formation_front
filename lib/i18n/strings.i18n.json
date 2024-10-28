@@ -1,5 +1,8 @@
 {
   "app_title": "Gestion de réunion",
+  "global": {
+    "loading": "Chargement..."
+  },
   "login": {
     "title": "Connexion",
     "email": "Email",
@@ -78,7 +81,7 @@
       "title": "Réunion le ",
       "at": "De ",
       "to": " à ",
-      "room": "Salle numéro : ",
+      "room": "Salle : ",
       "nbUsers": "Nbr de participants : ",
       "delete": "Supprimer"
     },

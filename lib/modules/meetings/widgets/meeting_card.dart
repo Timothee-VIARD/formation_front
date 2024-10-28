@@ -7,6 +7,7 @@ import 'package:formation_front/modules/common/customText/custom_text.dart';
 import 'package:formation_front/modules/common/tag/model/tag_model.dart';
 import 'package:formation_front/modules/common/tag/tags.dart';
 import 'package:formation_front/modules/meetings/model/meeting_answer_model.dart';
+import 'package:formation_front/modules/rooms/model/room_model.dart';
 import 'package:formation_front/utils/dateTime/date_state.dart';
 
 import '../../../i18n/strings.g.dart';
@@ -15,8 +16,9 @@ import '../controllers/cubit.dart';
 
 class MeetingCard extends StatelessWidget {
   final MeetingAnswer meeting;
+  final Future<List<Room>> rooms;
 
-  const MeetingCard({super.key, required this.meeting});
+  const MeetingCard({super.key, required this.meeting, required this.rooms});
 
   _getDateOnly() {
     return DateTimeUtils.getDateOnly(
@@ -62,6 +64,12 @@ class MeetingCard extends StatelessWidget {
     return TagModel(message: message, color: _getColorState());
   }
 
+  _getRoomName() {
+    return rooms.then((value) {
+      return value.firstWhere((room) => room.id == meeting.roomId).name;
+    });
+  }
+
   _deleteMeeting(BuildContext context) {
     Token token = (context.read<LoginCubit>().state as LoginSuccess).token;
     context.read<MeetingsCubit>().deleteMeeting(meeting.id, token.accessToken);
@@ -104,8 +112,13 @@ class MeetingCard extends StatelessWidget {
                   texts: [t.meetings.data.nbUsers, meeting.peopleNb.toString()],
                 ),
                 if (meeting.roomId != null)
-                  CustomText(
-                    texts: [t.meetings.data.room, meeting.roomId.toString()],
+                  FutureBuilder(
+                    future: _getRoomName(),
+                    builder: (context, snapshot) => snapshot.hasData
+                        ? CustomText(
+                            texts: [t.meetings.data.room, snapshot.data.toString()],
+                          )
+                        : Text(t.global.loading),
                   ),
               ],
             ),
