@@ -91,7 +91,7 @@
       "duration": "Durée (en minutes)",
       "duration_hint": "Entrez la durée en minutes",
       "room": "Nom de la salle",
-      "room_hint": "Entrez le nom de la salle",
+      "noRoom": "Pas de salle",
       "nbUsers": "Nombre de participants",
       "nbUsers_hint": "Entrez le nombre de participants",
       "confirm": "Confirmer la création ?"

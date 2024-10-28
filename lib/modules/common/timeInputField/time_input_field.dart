@@ -28,6 +28,12 @@ class TimeInputFieldState extends State<TimeInputField> {
       inputFormatters: <TextInputFormatter>[
         TimeTextInputFormatter(),
       ],
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return t.meetings.meeting.time_hint;
+        }
+        return null;
+      },
     );
   }
 

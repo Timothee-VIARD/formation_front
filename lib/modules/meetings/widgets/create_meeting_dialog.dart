@@ -11,6 +11,7 @@ import '../../../app/controllers/login_state.dart';
 import '../../../i18n/strings.g.dart';
 import '../../common/timeInputField/time_input_field.dart';
 import '../controllers/cubit.dart';
+import 'dropdown_widget.dart';
 
 class CreateMeetingDialog extends StatefulWidget {
   const CreateMeetingDialog({super.key});
@@ -116,7 +117,7 @@ class CreateMeetingDialogState extends State<CreateMeetingDialog> {
                 _dialogTitle,
                 const SizedBox(height: 16),
                 _dialogForm,
-                const SizedBox(height: 16),
+                const SizedBox(height: 24),
                 _dialogConfirm,
               ],
             ),
@@ -204,18 +205,7 @@ class CreateMeetingDialogState extends State<CreateMeetingDialog> {
             return null;
           },
         ),
-        TextFormField(
-          controller: _roomIdController,
-          decoration: InputDecoration(
-            labelText: t.meetings.meeting.room,
-          ),
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return t.meetings.meeting.room_hint;
-            }
-            return null;
-          },
-        ),
+        DropdownWidget(controller: _roomIdController),
       ],
     ),
   );
