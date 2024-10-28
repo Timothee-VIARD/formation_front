@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formation_front/modules/common/customDatePicker/custom_date_picker.dart';
+import 'package:formation_front/modules/meetings/controllers/state.dart';
 import 'package:formation_front/modules/meetings/model/meeting_model.dart';
 import 'package:formation_front/utils/dateTime/date_time.dart';
 import 'package:intl/intl.dart';
@@ -9,8 +10,11 @@ import 'package:intl/intl.dart';
 import '../../../app/controllers/login_cubit.dart';
 import '../../../app/controllers/login_state.dart';
 import '../../../i18n/strings.g.dart';
+import '../../common/snackBar/controllers/cubit.dart';
 import '../../common/timeInputField/time_input_field.dart';
+import '../../rooms/model/room_model.dart';
 import '../controllers/cubit.dart';
+import '../model/meeting_answer_model.dart';
 import 'dropdown_widget.dart';
 
 class CreateMeetingDialog extends StatefulWidget {
@@ -26,7 +30,9 @@ class CreateMeetingDialogState extends State<CreateMeetingDialog> {
   late TextEditingController _timeController;
   late TextEditingController _durationController;
   late TextEditingController _peopleNbController;
-  late TextEditingController _roomIdController;
+  late TextEditingController _roomNameController;
+
+  Room? dropdownValue;
 
   @override
   void initState() {
@@ -35,7 +41,7 @@ class CreateMeetingDialogState extends State<CreateMeetingDialog> {
     _timeController = TextEditingController();
     _durationController = TextEditingController();
     _peopleNbController = TextEditingController();
-    _roomIdController = TextEditingController();
+    _roomNameController = TextEditingController();
   }
 
   @override
@@ -44,24 +50,67 @@ class CreateMeetingDialogState extends State<CreateMeetingDialog> {
     _timeController.dispose();
     _durationController.dispose();
     _peopleNbController.dispose();
-    _roomIdController.dispose();
+    _roomNameController.dispose();
     super.dispose();
   }
 
   void _createMeeting() {
-    if (_formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate() &&
+        !_isTooManyPeople() &&
+        _isAvailable()) {
+      DateTime date = DateTimeUtils.mergeDateAndTimeString(
+          _dateController.text, _timeController.text);
+
       final Meeting meeting = Meeting(
-        date: DateTimeUtils.mergeDateAndTimeString(
-            _dateController.text, _timeController.text),
+        date: DateFormat('yyyy-MM-ddTHH:mm:ss').format(date),
         duration: int.parse(_durationController.text),
         peopleNb: int.parse(_peopleNbController.text),
-        roomId: _roomIdController.text,
+        roomId: _roomNameController.text,
       );
       String token =
           (context.read<LoginCubit>().state as LoginSuccess).token.accessToken;
+
       context.read<MeetingsCubit>().createMeeting(meeting, token);
       Navigator.of(context).pop();
     }
+  }
+
+  bool _isAvailable() {
+    DateTime date = DateTimeUtils.mergeDateAndTimeString(
+        _dateController.text, _timeController.text);
+
+    final int duration = int.parse(_durationController.text);
+    final state = context.read<MeetingsCubit>().state;
+    final List<MeetingAnswer> meetings =
+        List.from((state as MeetingsLoadSuccess).meetings);
+    final DateTime end = date.add(Duration(minutes: duration));
+
+    for (MeetingAnswer meeting in meetings) {
+      final DateTime meetingStart =
+          DateTimeUtils.getDateTimeFromString(meeting.date);
+      final DateTime meetingEnd =
+          DateTimeUtils.getDateTimePlusDuration(meetingStart, meeting.duration);
+      if (date.isBefore(meetingEnd) && end.isAfter(meetingStart)) {
+        BlocProvider.of<NotificationCubit>(context)
+            .showError(t.meetings.meeting.error.notAvailable);
+        return false;
+      }
+    }
+    return true;
+  }
+
+  bool _isTooManyPeople() {
+    int peopleNb = int.parse(_peopleNbController.text);
+    if (dropdownValue != null && peopleNb > dropdownValue!.nbMax) {
+      return true;
+    }
+    return false;
+  }
+
+  dynamic onRoomChange(Room? room) {
+    setState(() {
+      dropdownValue = room;
+    });
   }
 
   Future<void> _selectDate(BuildContext context) async {
@@ -205,7 +254,11 @@ class CreateMeetingDialogState extends State<CreateMeetingDialog> {
             return null;
           },
         ),
-        DropdownWidget(controller: _roomIdController),
+        DropdownWidget(
+          roomNameController: _roomNameController,
+          peopleNbController: _peopleNbController,
+          onRoomChanged: onRoomChange,
+        ),
       ],
     ),
   );

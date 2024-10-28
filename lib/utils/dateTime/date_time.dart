@@ -16,12 +16,12 @@ class DateTimeUtils {
     }
   }
 
-  static getDateTimePlusDuration(DateTime date, int duration) {
-    return date.add(Duration(minutes: duration));
+  static getDateTimeFromString(String date) {
+    return DateTime.parse(date);
   }
 
-  static DateTime getDateTimeFromString(String date) {
-    return DateTime.parse(date);
+  static getDateTimePlusDuration(DateTime date, int duration) {
+    return date.add(Duration(minutes: duration));
   }
 
   static String getDateOnly(DateTime date) {
@@ -32,12 +32,12 @@ class DateTimeUtils {
     return '${date.hour}:${date.minute.toString().padLeft(2, '0')}';
   }
 
-  static String mergeDateAndTimeString(String dataDate, String dataTime) {
+  static DateTime mergeDateAndTimeString(String dataDate, String dataTime) {
     final DateTime date = DateFormat('dd/MM/yyyy').parse(dataDate);
     final TimeOfDay time =
         TimeOfDay.fromDateTime(DateFormat('HH:mm').parse(dataTime));
     final DateTime dateTime =
         DateTime(date.year, date.month, date.day, time.hour, time.minute);
-    return DateFormat('yyyy-MM-ddTHH:mm:ss').format(dateTime);
+    return dateTime;
   }
 }

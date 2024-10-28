@@ -79,7 +79,7 @@
       "at": "De ",
       "to": " à ",
       "room": "Salle numéro : ",
-      "nbUsers": "Nombre de participants :",
+      "nbUsers": "Nbr de participants : ",
       "delete": "Supprimer"
     },
     "meeting": {
@@ -94,7 +94,11 @@
       "noRoom": "Pas de salle",
       "nbUsers": "Nombre de participants",
       "nbUsers_hint": "Entrez le nombre de participants",
-      "confirm": "Confirmer la création ?"
+      "confirm": "Confirmer la création ?",
+      "error": {
+        "notAvailable": "Impossible d'ajouter la réunion, l'utilisateur est déjà en réunion sur cette plage horaire",
+        "tooMuchUsers": "Pas assez de place"
+      }
     }
   }
 }

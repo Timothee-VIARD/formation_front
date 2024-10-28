@@ -15,7 +15,7 @@ class SnackBarPage {
 
   SnackBar build(BuildContext context) {
     return SnackBar(
-      duration: const Duration(seconds: 2),
+      duration: const Duration(seconds: 3),
       content: Text(title),
       showCloseIcon: true,
       backgroundColor: level == SnackBarLevel.error
