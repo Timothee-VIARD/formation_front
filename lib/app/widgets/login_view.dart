@@ -16,6 +16,7 @@ class _LoginViewState extends State<LoginView> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  bool _isPasswordVisible = false;
 
   @override
   void dispose() {
@@ -73,8 +74,21 @@ class _LoginViewState extends State<LoginView> {
                     const SizedBox(height: 8),
                     TextFormField(
                       controller: _passwordController,
+                      obscureText: !_isPasswordVisible, // Update this line
                       decoration: InputDecoration(
                         labelText: t.login.password,
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _isPasswordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _isPasswordVisible = !_isPasswordVisible;
+                            });
+                          },
+                        ),
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {

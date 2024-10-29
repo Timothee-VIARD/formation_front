@@ -84,6 +84,9 @@ class CreateMeetingDialogState extends State<CreateMeetingDialog> {
     final state = context.read<MeetingsCubit>().state;
     final List<MeetingAnswer> meetings =
         List.from((state as MeetingsLoadSuccess).meetings);
+    meetings.removeWhere((meeting) =>
+        meeting.userName !=
+        (context.read<LoginCubit>().state as LoginSuccess).username);
     final DateTime end = date.add(Duration(minutes: duration));
 
     for (MeetingAnswer meeting in meetings) {

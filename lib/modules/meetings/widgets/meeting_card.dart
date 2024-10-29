@@ -14,30 +14,50 @@ import '../../../i18n/strings.g.dart';
 import '../../../utils/dateTime/date_time.dart';
 import '../controllers/cubit.dart';
 
-class MeetingCard extends StatelessWidget {
+class MeetingCard extends StatefulWidget {
   final MeetingAnswer meeting;
   final Future<List<Room>> rooms;
 
   const MeetingCard({super.key, required this.meeting, required this.rooms});
 
+  @override
+  State<MeetingCard> createState() => _MeetingCardState();
+}
+
+class _MeetingCardState extends State<MeetingCard> {
+
+  late Future<String> _roomNameFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _roomNameFuture = _getRoomName();
+  }
+
+  _getRoomName() {
+    return widget.rooms.then((value) {
+      return value.firstWhere((room) => room.id == widget.meeting.roomId).name;
+    });
+  }
+
   _getDateOnly() {
     return DateTimeUtils.getDateOnly(
-        DateTimeUtils.getDateTimeFromString(meeting.date));
+        DateTimeUtils.getDateTimeFromString(widget.meeting.date));
   }
 
   _getTimeOnly() {
     return DateTimeUtils.getTimeOnly(
-        DateTimeUtils.getDateTimeFromString(meeting.date));
+        DateTimeUtils.getDateTimeFromString(widget.meeting.date));
   }
 
   _getTimeOnlyPlusDuration() {
     return DateTimeUtils.getTimeOnly(DateTimeUtils.getDateTimePlusDuration(
-        DateTimeUtils.getDateTimeFromString(meeting.date), meeting.duration));
+        DateTimeUtils.getDateTimeFromString(widget.meeting.date), widget.meeting.duration));
   }
 
   _getDateState() {
     return DateTimeUtils.getDateState(
-        DateTimeUtils.getDateTimeFromString(meeting.date), meeting.duration);
+        DateTimeUtils.getDateTimeFromString(widget.meeting.date), widget.meeting.duration);
   }
 
   _getColorState() {
@@ -64,15 +84,9 @@ class MeetingCard extends StatelessWidget {
     return TagModel(message: message, color: _getColorState());
   }
 
-  _getRoomName() {
-    return rooms.then((value) {
-      return value.firstWhere((room) => room.id == meeting.roomId).name;
-    });
-  }
-
   _deleteMeeting(BuildContext context) {
     Token token = (context.read<LoginCubit>().state as LoginSuccess).token;
-    context.read<MeetingsCubit>().deleteMeeting(meeting.id, token.accessToken);
+    context.read<MeetingsCubit>().deleteMeeting(widget.meeting.id, token.accessToken);
   }
 
   @override
@@ -109,17 +123,27 @@ class MeetingCard extends StatelessWidget {
                   ],
                 ),
                 CustomText(
-                  texts: [t.meetings.data.nbUsers, meeting.peopleNb.toString()],
+                  texts: [t.meetings.data.nbUsers, widget.meeting.peopleNb.toString()],
                 ),
-                if (meeting.roomId != null)
-                  FutureBuilder(
-                    future: _getRoomName(),
-                    builder: (context, snapshot) => snapshot.hasData
-                        ? CustomText(
-                            texts: [t.meetings.data.room, snapshot.data.toString()],
-                          )
-                        : Text(t.global.loading),
-                  ),
+                FutureBuilder(
+                  future: _roomNameFuture,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Text(t.global.loading);
+                    } else if (snapshot.hasData) {
+                      return CustomText(
+                        texts: [t.meetings.data.room, snapshot.data.toString()],
+                      );
+                    }
+                    return Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        t.meetings.meeting.noRoom,
+                        style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
             const SizedBox(height: 20),
