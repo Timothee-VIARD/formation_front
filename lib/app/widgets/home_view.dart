@@ -21,7 +21,6 @@ class NavigationHome extends StatelessWidget {
         title: Text("${t.app_title} - ${loginSuccess.username}"),
         forceMaterialTransparency: true,
         actions: [
-          //logout button
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
