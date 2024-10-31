@@ -28,10 +28,19 @@ void main() {
     expect(find.byType(CalendarDatePicker), findsOneWidget);
 
     final DateTime tomorrow = now.add(const Duration(days: 1));
-    final DateTime tomorrowMidnight = DateTime(tomorrow.year, tomorrow.month, tomorrow.day);
-    final ValueKey<DateTime> tomorrowKey = ValueKey(tomorrowMidnight);
-    await tester.tap(find.byKey(tomorrowKey));
+    final DateTime yesterday = now.subtract(const Duration(days: 1));
+    final DateTime tomorrowMidnight =
+        DateTime(tomorrow.year, tomorrow.month, tomorrow.day);
+    final DateTime yesterdayMidnight =
+        DateTime(yesterday.year, yesterday.month, yesterday.day);
+    final DateTime selectedDate =
+        (tomorrow.month != now.month) ? yesterdayMidnight : tomorrowMidnight;
+    final ValueKey<DateTime> selectedDateKey = ValueKey(selectedDate);
+    await tester.tap(find.byKey(selectedDateKey));
     await tester.pump();
-    expect(find.text('${tomorrowMidnight.day}/${tomorrowMidnight.month}/${tomorrowMidnight.year}'), findsOneWidget);
+    expect(
+        find.text(
+            '${selectedDate.day}/${selectedDate.month}/${selectedDate.year}'),
+        findsOneWidget);
   });
 }

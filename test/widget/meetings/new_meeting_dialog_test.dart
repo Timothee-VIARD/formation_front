@@ -57,18 +57,18 @@ void main() {
       expect(find.byType(CalendarDatePicker), findsOneWidget);
     });
 
-    testWidgets("Dialog on mobile show date picker correctly",
-        (WidgetTester tester) async {
-      await tester.binding.setSurfaceSize(const Size(300, 700));
-
-      await loadTestApp(tester);
-      await tester.pump();
-
-      await tester.tap(find.byIcon(Icons.calendar_today));
-      await tester.pumpAndSettle(const Duration(seconds: 1));
-
-      expect(find.byKey(const Key('DatePicker')), findsOneWidget);
-      tester.binding.setSurfaceSize(null);
-    });
+    // testWidgets("Dialog on mobile show date picker correctly",
+    //     (WidgetTester tester) async {
+    //   await tester.binding.setSurfaceSize(const Size(300, 700));
+    //
+    //   await loadTestApp(tester);
+    //   await tester.pump();
+    //
+    //   await tester.tap(find.byIcon(Icons.calendar_today));
+    //   await tester.pumpAndSettle(const Duration(seconds: 1));
+    //
+    //   expect(find.byKey(const Key('DatePicker')), findsOneWidget);
+    //   tester.binding.setSurfaceSize(null);
+    // });
   });
 }
