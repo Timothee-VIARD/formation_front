@@ -101,9 +101,7 @@ class TimeTextInputFormatter extends TextInputFormatter {
 
     if (formatted.length == 2 && !formatted.contains(':')) {
       formatted += ':';
-    } else if (formatted.length == 3 && !formatted.contains(':')) {
-      formatted = '${formatted.substring(0, 2)}:${formatted.substring(2)}';
-    } else if (formatted.length == 4 && !formatted.contains(':')) {
+    } else if (formatted.length >= 3 && !formatted.contains(':')) {
       formatted = '${formatted.substring(0, 2)}:${formatted.substring(2)}';
     }
 

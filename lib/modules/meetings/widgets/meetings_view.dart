@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formation_front/modules/meetings/controllers/cubit.dart';
 import 'package:formation_front/modules/meetings/controllers/state.dart';
-import 'package:formation_front/modules/meetings/widgets/create_meeting_dialog.dart';
+import 'package:formation_front/modules/meetings/widgets/new_meeting_dialog.dart';
 import 'package:formation_front/modules/meetings/widgets/meetings_list.dart';
+import 'package:http/http.dart' as http;
+import 'package:http/io_client.dart' as http_io;
 
 import '../../../i18n/strings.g.dart';
 import '../../../utils/api/api_service.dart';
@@ -19,6 +21,8 @@ class MeetingsView extends StatefulWidget {
 class _MeetingsViewState extends State<MeetingsView> {
   bool showPastMeetings = false;
   final ApiService apiService = ApiService();
+  http.Client client = http_io.IOClient();
+
   late Future<List<Room>> rooms;
 
   @override
@@ -29,7 +33,7 @@ class _MeetingsViewState extends State<MeetingsView> {
   }
 
   Future<List<Room>> _getRooms() {
-    Future<List<Room>> data = apiService.get('/salles').then(
+    Future<List<Room>> data = apiService.get('/salles', client).then(
       (response) {
         return response.map<Room>((room) {
           return Room.fromJson(room);
@@ -46,7 +50,7 @@ class _MeetingsViewState extends State<MeetingsView> {
       builder: (BuildContext dialogContext) {
         return BlocProvider.value(
           value: BlocProvider.of<MeetingsCubit>(context),
-          child: CreateMeetingDialog(rooms: rooms),
+          child: NewMeetingDialog(rooms: rooms),
         );
       },
     );

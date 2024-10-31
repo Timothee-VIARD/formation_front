@@ -1,9 +1,11 @@
-class Room {
+import 'package:equatable/equatable.dart';
+
+class Room extends Equatable {
   final int id;
   final String name;
   final int nbMax;
 
-  Room({required this.id, required this.name, required this.nbMax});
+  const Room({required this.id, required this.name, required this.nbMax});
 
   factory Room.fromJson(Map<String, dynamic> json) {
     return Room(
@@ -13,20 +15,6 @@ class Room {
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'nb_max': nbMax,
-    };
-  }
-
   @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-    return other is Room && other.id == id;
-  }
-
-  @override
-  int get hashCode => id.hashCode;
+  List<Object?> get props => [id, name, nbMax];
 }

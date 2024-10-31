@@ -17,15 +17,15 @@ import '../controllers/cubit.dart';
 import '../model/meeting_answer_model.dart';
 import 'dropdown_widget.dart';
 
-class CreateMeetingDialog extends StatefulWidget {
+class NewMeetingDialog extends StatefulWidget {
   final Future<List<Room>> rooms;
-  const CreateMeetingDialog({super.key, required this.rooms});
+  const NewMeetingDialog({super.key, required this.rooms});
 
   @override
-  CreateMeetingDialogState createState() => CreateMeetingDialogState();
+  NewMeetingDialogState createState() => NewMeetingDialogState();
 }
 
-class CreateMeetingDialogState extends State<CreateMeetingDialog> {
+class NewMeetingDialogState extends State<NewMeetingDialog> {
   final _formKey = GlobalKey<FormState>();
   late TextEditingController _dateController;
   late TextEditingController _timeController;
@@ -127,12 +127,13 @@ class CreateMeetingDialogState extends State<CreateMeetingDialog> {
       initialEntryMode: DatePickerEntryMode.calendarOnly,
       builder: (context, child) {
         return Theme(
+          key: const Key('DatePicker'),
           data: ThemeData(
             useMaterial3: false,
             dialogTheme: DialogTheme(
               shape: RoundedRectangleBorder(
                 borderRadius:
-                    BorderRadius.circular(20), // Set the border radius here
+                    BorderRadius.circular(20),
               ),
             ),
             colorScheme: const ColorScheme.light(

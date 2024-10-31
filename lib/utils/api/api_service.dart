@@ -7,8 +7,8 @@ class ApiService {
 
   ApiService();
 
-  Future<dynamic> get(String endpoint) async {
-    final response = await http.get(Uri.parse('$baseUrl$endpoint'));
+  Future<dynamic> get(String endpoint, http.Client client) async {
+    final response = await client.get(Uri.parse('$baseUrl$endpoint'));
     if (response.statusCode == 200) {
       return json.decode(utf8.decode(response.bodyBytes));
     } else {
@@ -16,11 +16,11 @@ class ApiService {
     }
   }
 
-  Future<dynamic> post(
-      String endpoint, Map<String, dynamic> data, bool isEncoded,
+  Future<dynamic> post(String endpoint, Map<String, dynamic> data,
+      bool isEncoded, http.Client client,
       [String? token]) async {
     final headers = token != null ? {'Authorization': 'Bearer $token'} : null;
-    final response = await http.post(
+    final response = await client.post(
       Uri.parse('$baseUrl$endpoint'),
       headers: {
         'Content-Type': isEncoded
@@ -38,9 +38,9 @@ class ApiService {
     }
   }
 
-  Future<dynamic> delete(String endpoint, [String? token]) async {
+  Future<dynamic> delete(String endpoint, http.Client client, [String? token]) async {
     final headers = token != null ? {'Authorization': 'Bearer $token'} : null;
-    final response = await http.delete(
+    final response = await client.delete(
       Uri.parse('$baseUrl$endpoint'),
       headers: headers,
     );

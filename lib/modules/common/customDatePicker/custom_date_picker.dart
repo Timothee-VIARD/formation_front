@@ -22,18 +22,9 @@ class CustomCalendarDatePickerState extends State<CustomCalendarDatePicker> {
   @override
   void initState() {
     super.initState();
-    _selectedDate = _getDateFromController() ?? DateTime.now();
+    _selectedDate = DateTime.now();
     if (widget.controller.text.isEmpty) {
       widget.controller.text = DateFormat('dd/MM/yyyy').format(_selectedDate);
-    }
-  }
-
-  DateTime? _getDateFromController() {
-    if (widget.controller.text.isEmpty) return null;
-    try {
-      return DateFormat('dd/MM/yyyy').parse(widget.controller.text);
-    } catch (e) {
-      return null;
     }
   }
 
@@ -83,24 +74,21 @@ class CustomCalendarDatePickerState extends State<CustomCalendarDatePicker> {
               child: Material(
                 color: Colors.white,
                 elevation: 4.0,
-                child: GestureDetector(
-                  onTap: () {},
-                  child: Theme(
-                    data: ThemeData(
-                      colorScheme: const ColorScheme.light(
-                        primary: Color(0xFF494949),
-                        onSurface: Colors.black,
-                      ),
+                child: Theme(
+                  data: ThemeData(
+                    colorScheme: const ColorScheme.light(
+                      primary: Color(0xFF494949),
+                      onSurface: Colors.black,
                     ),
-                    child: Localizations.override(
-                      context: context,
-                      locale: const Locale('fr', 'FR'),
-                      child: CalendarDatePicker(
-                        initialDate: _selectedDate,
-                        firstDate: DateTime(2000),
-                        lastDate: DateTime(2100),
-                        onDateChanged: _updateDate,
-                      ),
+                  ),
+                  child: Localizations.override(
+                    context: context,
+                    locale: const Locale('fr', 'FR'),
+                    child: CalendarDatePicker(
+                      initialDate: _selectedDate,
+                      firstDate: DateTime(2000),
+                      lastDate: DateTime(2100),
+                      onDateChanged: _updateDate,
                     ),
                   ),
                 ),
