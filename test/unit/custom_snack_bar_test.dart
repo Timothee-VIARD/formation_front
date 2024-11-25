@@ -1,7 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:formation_front/modules/common/snackBar/controllers/cubit.dart';
-import 'package:formation_front/modules/common/snackBar/controllers/state.dart';
+import 'package:formation_front/modules/common/snack_bar/controllers/cubit.dart';
+import 'package:formation_front/modules/common/snack_bar/controllers/state.dart';
 
 void main() {
   group('NotificationCubit', () {

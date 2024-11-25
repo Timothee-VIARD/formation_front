@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formation_front/app/model/login_model.dart';
 import 'package:formation_front/modules/users/repository/users_repository.dart';
 
-import '../../../modules/common/snackBar/controllers/cubit.dart';
+import '../../../modules/common/snack_bar/controllers/cubit.dart';
 import '../controllers/login_state.dart';
 import '../repository/login_repository.dart';
 

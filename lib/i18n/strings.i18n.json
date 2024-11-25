@@ -1,7 +1,12 @@
 {
   "app_title": "Gestion de réunion",
   "global": {
-    "loading": "Chargement..."
+    "loading": "Chargement...",
+    "dateState": {
+      "now": "En cours",
+      "soon": "A venir",
+      "late": "Terminée"
+    }
   },
   "login": {
     "title": "Connexion",

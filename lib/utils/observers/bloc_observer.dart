@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../main.dart';
-import '../../modules/common/snackBar/controllers/cubit.dart';
-import '../../modules/common/snackBar/controllers/state.dart';
-import '../../modules/common/snackBar/custom_snack_bar.dart';
+import '../../modules/common/snack_bar/controllers/cubit.dart';
+import '../../modules/common/snack_bar/controllers/state.dart';
+import '../../modules/common/snack_bar/custom_snack_bar.dart';
 
 class AppBlocObserver extends BlocObserver {
   @override

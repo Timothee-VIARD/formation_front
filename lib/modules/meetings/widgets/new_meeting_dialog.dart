@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:formation_front/modules/common/customDatePicker/custom_date_picker.dart';
+import 'package:formation_front/modules/common/custom_date_picker/custom_date_picker.dart';
 import 'package:formation_front/modules/meetings/controllers/state.dart';
 import 'package:formation_front/modules/meetings/model/meeting_model.dart';
-import 'package:formation_front/utils/dateTime/date_time.dart';
+import 'package:formation_front/utils/date_time/date_time.dart';
 import 'package:intl/intl.dart';
 
 import '../../../app/controllers/login_cubit.dart';
 import '../../../app/controllers/login_state.dart';
 import '../../../i18n/strings.g.dart';
-import '../../common/snackBar/controllers/cubit.dart';
-import '../../common/timeInputField/time_input_field.dart';
+import '../../common/snack_bar/controllers/cubit.dart';
+import '../../common/time_input_field/time_input_field.dart';
 import '../../rooms/model/room_model.dart';
 import '../controllers/cubit.dart';
 import '../model/meeting_answer_model.dart';
 import 'dropdown_widget.dart';
 
 class NewMeetingDialog extends StatefulWidget {
-  final Future<List<Room>> rooms;
-  const NewMeetingDialog({super.key, required this.rooms});
+  final MeetingsState state;
+  const NewMeetingDialog({super.key, required this.state});
 
   @override
   NewMeetingDialogState createState() => NewMeetingDialogState();
@@ -111,7 +111,7 @@ class NewMeetingDialogState extends State<NewMeetingDialog> {
     return false;
   }
 
-  dynamic onRoomChange(Room? room) {
+  void onRoomChange(Room? room) {
     setState(() {
       dropdownValue = room;
     });
@@ -259,12 +259,7 @@ class NewMeetingDialogState extends State<NewMeetingDialog> {
             return null;
           },
         ),
-        DropdownWidget(
-          rooms: widget.rooms,
-          roomNameController: _roomNameController,
-          peopleNbController: _peopleNbController,
-          onRoomChanged: onRoomChange,
-        ),
+        _getDropDown(),
       ],
     ),
   );
@@ -279,4 +274,20 @@ class NewMeetingDialogState extends State<NewMeetingDialog> {
       ),
     ),
   );
+
+  Widget _getDropDown () {
+    switch(widget.state){
+      case MeetingsLoading():
+        return const Center(child: CircularProgressIndicator());
+      case MeetingsLoadSuccess(:final rooms):
+        return DropdownWidget(
+          rooms: rooms,
+          roomNameController: _roomNameController,
+          peopleNbController: _peopleNbController,
+          onRoomChanged: onRoomChange,
+        );
+      default:
+        return Text("Error");
+    }
+  }
 }

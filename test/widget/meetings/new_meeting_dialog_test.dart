@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formation_front/i18n/strings.g.dart';
-import 'package:formation_front/modules/common/customDatePicker/custom_date_picker.dart';
+import 'package:formation_front/modules/common/custom_date_picker/custom_date_picker.dart';
+import 'package:formation_front/modules/meetings/controllers/state.dart';
 import 'package:formation_front/modules/meetings/widgets/new_meeting_dialog.dart';
 import 'package:formation_front/modules/rooms/model/room_model.dart';
 
 void main() {
   group('NewMeetingDialog', () {
-    final Future<List<Room>> rooms = Future.value([
+    final List<Room> rooms = [
       const Room(id: 1, name: 'Room 1', nbMax: 1),
       const Room(id: 2, name: 'Room 2', nbMax: 1),
-    ]);
+    ];
+
+    final MeetingsLoadSuccess state = MeetingsLoadSuccess([], rooms);
 
     loadTestApp(tester) async {
       return await tester.pumpWidget(
@@ -20,7 +23,7 @@ void main() {
           localizationsDelegates: GlobalMaterialLocalizations.delegates,
           home: Scaffold(
             body: NewMeetingDialog(
-              rooms: rooms,
+              state: state,
             ),
           ),
         ),

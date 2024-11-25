@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formation_front/modules/rooms/repository/rooms_repository.dart';
 
-import '../../common/snackBar/controllers/cubit.dart';
+import '../../common/snack_bar/controllers/cubit.dart';
 import 'state.dart';
 
 class RoomsCubit extends Cubit<RoomsState> {

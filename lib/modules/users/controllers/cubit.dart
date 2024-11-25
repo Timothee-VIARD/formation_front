@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../common/snackBar/controllers/cubit.dart';
+import '../../common/snack_bar/controllers/cubit.dart';
 import '../repository/users_repository.dart';
 import 'state.dart';
 

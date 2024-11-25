@@ -4,23 +4,21 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:formation_front/modules/meetings/controllers/state.dart';
 import 'package:formation_front/modules/meetings/model/meeting_answer_model.dart';
 import 'package:formation_front/modules/meetings/widgets/meeting_card.dart';
-import 'package:formation_front/modules/rooms/model/room_model.dart';
 
 import '../../../app/controllers/login_cubit.dart';
 import '../../../app/controllers/login_state.dart';
-import '../../../utils/dateTime/date_time.dart';
+import '../../../utils/date_time/date_time.dart';
 
 class MeetingsList extends StatelessWidget {
   final MeetingsState state;
   final bool showPastMeetings;
-  final Future<List<Room>> rooms;
 
   const MeetingsList(
-      {super.key, required this.state, required this.showPastMeetings, required this.rooms});
+      {super.key, required this.state, required this.showPastMeetings});
 
-  _getMeetings(String username) {
+  List<MeetingAnswer> _getMeetings(String username, List<MeetingAnswer> meetingsData) {
     List<MeetingAnswer> meetings =
-        List.from((state as MeetingsLoadSuccess).meetings);
+        List.from(meetingsData);
     meetings.sort((a, b) => a.date.compareTo(b.date));
 
     meetings = meetings.where((meeting) => meeting.userName == username).toList();
@@ -42,15 +40,16 @@ class MeetingsList extends StatelessWidget {
     switch (state) {
       case MeetingsLoading():
         return const Center(child: CircularProgressIndicator());
-      case MeetingsLoadSuccess():
-      int crossAxisCount = (MediaQuery.of(context).size.width ~/ 300).clamp(1, 5);
+      case MeetingsLoadSuccess(:final meetings, :final rooms):
+        final filteredMeetings = _getMeetings(loginSuccess.username, meetings);
+        int crossAxisCount = (MediaQuery.of(context).size.width ~/ 300).clamp(1, 5);
         return AlignedGridView.count(
           crossAxisCount: crossAxisCount,
           mainAxisSpacing: 8,
           crossAxisSpacing: 8,
-          itemCount: _getMeetings(loginSuccess.username).length,
+          itemCount: filteredMeetings.length,
           itemBuilder: (context, index) {
-            final meeting = _getMeetings(loginSuccess.username)[index];
+            final meeting = filteredMeetings[index];
             return MeetingCard(meeting: meeting, rooms: rooms);
           },
         );

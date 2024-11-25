@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:formation_front/modules/common/snackBar/custom_snack_bar.dart';
+import 'package:formation_front/modules/common/snack_bar/custom_snack_bar.dart';
 
 void main() {
   testWidgets('CustomSnackBar error displays correctly', (WidgetTester tester) async {

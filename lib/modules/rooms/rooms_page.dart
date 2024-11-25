@@ -4,7 +4,7 @@ import 'package:formation_front/modules/rooms/controllers/cubit.dart';
 import 'package:formation_front/modules/rooms/repository/rooms_repository.dart';
 
 import '../../utils/mouse_back_detector.dart';
-import '../common/snackBar/controllers/cubit.dart';
+import '../common/snack_bar/controllers/cubit.dart';
 import 'widgets/rooms_view.dart';
 
 class RoomsPage extends StatelessWidget {

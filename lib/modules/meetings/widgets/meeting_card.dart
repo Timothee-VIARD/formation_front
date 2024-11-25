@@ -3,20 +3,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formation_front/app/controllers/login_cubit.dart';
 import 'package:formation_front/app/controllers/login_state.dart';
 import 'package:formation_front/app/model/token_model.dart';
-import 'package:formation_front/modules/common/customText/custom_text.dart';
+import 'package:formation_front/modules/common/custom_text/custom_text.dart';
 import 'package:formation_front/modules/common/tag/model/tag_model.dart';
 import 'package:formation_front/modules/common/tag/tags.dart';
 import 'package:formation_front/modules/meetings/model/meeting_answer_model.dart';
 import 'package:formation_front/modules/rooms/model/room_model.dart';
-import 'package:formation_front/utils/dateTime/date_state.dart';
+import 'package:formation_front/utils/date_time/date_state.dart';
 
 import '../../../i18n/strings.g.dart';
-import '../../../utils/dateTime/date_time.dart';
+import '../../../utils/date_time/date_time.dart';
 import '../controllers/cubit.dart';
 
 class MeetingCard extends StatefulWidget {
   final MeetingAnswer meeting;
-  final Future<List<Room>> rooms;
+  final List<Room> rooms;
 
   const MeetingCard({super.key, required this.meeting, required this.rooms});
 
@@ -34,57 +34,39 @@ class _MeetingCardState extends State<MeetingCard> {
     _roomNameFuture = _getRoomName();
   }
 
-  _getRoomName() {
-    return widget.rooms.then((value) {
-      return value.firstWhere((room) => room.id == widget.meeting.roomId).name;
-    });
+  Future<String> _getRoomName() async {
+    final Room room = widget.rooms.firstWhere(
+      (room) => room.id == widget.meeting.roomId,
+    );
+    return room.name;
   }
 
-  _getDateOnly() {
+  String _getDateOnly() {
     return DateTimeUtils.getDateOnly(
         DateTimeUtils.getDateTimeFromString(widget.meeting.date));
   }
 
-  _getTimeOnly() {
+  String _getTimeOnly() {
     return DateTimeUtils.getTimeOnly(
         DateTimeUtils.getDateTimeFromString(widget.meeting.date));
   }
 
-  _getTimeOnlyPlusDuration() {
+  String _getTimeOnlyPlusDuration() {
     return DateTimeUtils.getTimeOnly(DateTimeUtils.getDateTimePlusDuration(
         DateTimeUtils.getDateTimeFromString(widget.meeting.date), widget.meeting.duration));
   }
 
-  _getDateState() {
+  DateState _getDateState() {
     return DateTimeUtils.getDateState(
         DateTimeUtils.getDateTimeFromString(widget.meeting.date), widget.meeting.duration);
   }
 
-  _getColorState() {
-    switch (_getDateState()) {
-      case DateState.now:
-        return const Color(0xA1ff9800);
-      case DateState.soon:
-        return const Color(0xA14caf50);
-      case DateState.late:
-        return const Color(0xB6FA6565);
-    }
+  TagModel _getTag() {
+    DateState dateState = _getDateState();
+    return TagModel(message: dateState.message, color: dateState.color);
   }
 
-  _getTag() {
-    String message = "";
-    switch (_getDateState()) {
-      case DateState.now:
-        message = 'En cours';
-      case DateState.soon:
-        message = 'A venir';
-      case DateState.late:
-        message = 'Terminée';
-    }
-    return TagModel(message: message, color: _getColorState());
-  }
-
-  _deleteMeeting(BuildContext context) {
+  void _deleteMeeting(BuildContext context) {
     Token token = (context.read<LoginCubit>().state as LoginSuccess).token;
     context.read<MeetingsCubit>().deleteMeeting(widget.meeting.id, token.accessToken);
   }

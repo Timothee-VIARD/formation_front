@@ -9,7 +9,7 @@ class DropdownWidget extends StatefulWidget {
   final TextEditingController peopleNbController;
   final Function(Room?) onRoomChanged;
 
-  final Future<List<Room>> rooms;
+  final List<Room> rooms;
 
   const DropdownWidget({
     super.key,
@@ -40,14 +40,14 @@ class _DropdownWidgetState extends State<DropdownWidget> {
   }
 
   void _loadData() {
-    _data = widget.rooms.then((rooms) {
-      return rooms.map((Room room) {
+    _data = Future.value(
+      widget.rooms.map((Room room) {
         return DropdownMenuItem<Room>(
           value: room,
           child: Text(room.name),
         );
-      }).toList();
-    });
+      }).toList(),
+    );
   }
 
   bool _isRoomCapacityValid() {

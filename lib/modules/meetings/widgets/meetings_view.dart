@@ -2,14 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formation_front/modules/meetings/controllers/cubit.dart';
 import 'package:formation_front/modules/meetings/controllers/state.dart';
-import 'package:formation_front/modules/meetings/widgets/new_meeting_dialog.dart';
 import 'package:formation_front/modules/meetings/widgets/meetings_list.dart';
-import 'package:http/http.dart' as http;
-import 'package:http/io_client.dart' as http_io;
+import 'package:formation_front/modules/meetings/widgets/new_meeting_dialog.dart';
 
 import '../../../i18n/strings.g.dart';
-import '../../../utils/api/api_service.dart';
-import '../../rooms/model/room_model.dart';
 
 class MeetingsView extends StatefulWidget {
   const MeetingsView({super.key});
@@ -20,37 +16,25 @@ class MeetingsView extends StatefulWidget {
 
 class _MeetingsViewState extends State<MeetingsView> {
   bool showPastMeetings = false;
-  final ApiService apiService = ApiService();
-  http.Client client = http_io.IOClient();
-
-  late Future<List<Room>> rooms;
+  late MeetingsCubit cubit;
 
   @override
   void initState() {
     super.initState();
-    context.read<MeetingsCubit>().getMeetings();
-    rooms = _getRooms();
+    cubit = context.read<MeetingsCubit>();
+    cubit.getMeetings();
   }
 
-  Future<List<Room>> _getRooms() {
-    Future<List<Room>> data = apiService.get('/salles', client).then(
-      (response) {
-        return response.map<Room>((room) {
-          return Room.fromJson(room);
-        }).toList();
-      },
-    );
-    return data;
-  }
 
   void _showCreateMeetingDialog(BuildContext context) {
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext dialogContext) {
+        final MeetingsCubit value = BlocProvider.of<MeetingsCubit>(context);
         return BlocProvider.value(
-          value: BlocProvider.of<MeetingsCubit>(context),
-          child: NewMeetingDialog(rooms: rooms),
+          value: value,
+          child: NewMeetingDialog(state: cubit.state),
         );
       },
     );
@@ -80,7 +64,6 @@ class _MeetingsViewState extends State<MeetingsView> {
                       child: MeetingsList(
                         state: state,
                         showPastMeetings: showPastMeetings,
-                        rooms: rooms,
                       ),
                     ),
                   ),

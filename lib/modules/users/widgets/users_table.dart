@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formation_front/modules/users/model/user_model.dart';
 
 import '../../../i18n/strings.g.dart';
 import '../controllers/cubit.dart';
@@ -17,7 +18,7 @@ class UsersTable extends StatelessWidget {
     switch (state) {
       case UsersLoading():
         return const Center(child: CircularProgressIndicator());
-      case UsersLoadSuccess():
+      case UsersLoadSuccess(:final users):
         return LayoutBuilder(
           builder: (context, constraints) {
             return Align(
@@ -47,7 +48,7 @@ class UsersTable extends StatelessWidget {
                           label: Text(t.users.data.actions),
                         ),
                       ],
-                      rows: _dataRows(context, constraints),
+                      rows: _dataRows(context, constraints, users),
                     ),
                   ),
                 ),
@@ -60,8 +61,8 @@ class UsersTable extends StatelessWidget {
     }
   }
 
-  List<DataRow> _dataRows(BuildContext context, BoxConstraints constraints) {
-    List<DataRow> list = (state as UsersLoadSuccess).users.map<DataRow>((user) {
+  List<DataRow> _dataRows(BuildContext context, BoxConstraints constraints, List<User> users) {
+    List<DataRow> list = users.map<DataRow>((user) {
       final double idColumnWidth = constraints.minWidth * 0.05;
       final double nameColumnWidth = constraints.minWidth * 0.3;
       final double emailColumnWidth = constraints.minWidth * 0.4;

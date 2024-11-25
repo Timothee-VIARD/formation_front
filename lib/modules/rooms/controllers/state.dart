@@ -1,3 +1,5 @@
+import 'package:formation_front/modules/rooms/model/room_model.dart';
+
 sealed class RoomsState {}
 
 class RoomsInitial extends RoomsState {}
@@ -5,13 +7,13 @@ class RoomsInitial extends RoomsState {}
 class RoomsLoading extends RoomsState {}
 
 class RoomsLoadSuccess extends RoomsState {
-  final dynamic rooms;
+  final List<Room> rooms;
 
   RoomsLoadSuccess(this.rooms);
 }
 
 class RoomsLoadError extends RoomsState {
-  final dynamic error;
+  final Object error;
 
   RoomsLoadError(this.error);
 }

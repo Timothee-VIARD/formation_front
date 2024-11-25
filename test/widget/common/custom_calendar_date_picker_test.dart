@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formation_front/i18n/strings.g.dart';
-import 'package:formation_front/modules/common/customDatePicker/custom_date_picker.dart';
+import 'package:formation_front/modules/common/custom_date_picker/custom_date_picker.dart';
 
 void main() {
   testWidgets('CustomCalendarDatePicker', (WidgetTester tester) async {

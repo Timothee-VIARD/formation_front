@@ -15,7 +15,7 @@ class LoginSuccess extends LoginState {
 }
 
 class LoginError extends LoginState {
-  final dynamic error;
+  final Object error;
 
   LoginError(this.error);
 }

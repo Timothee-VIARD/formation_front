@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:formation_front/utils/dateTime/date_state.dart';
+import 'package:formation_front/utils/date_time/date_state.dart';
 import 'package:intl/intl.dart';
 
 class DateTimeUtils {

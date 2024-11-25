@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:formation_front/utils/dateTime/date_state.dart';
-import 'package:formation_front/utils/dateTime/date_time.dart';
+import 'package:formation_front/utils/date_time/date_state.dart';
+import 'package:formation_front/utils/date_time/date_time.dart';
 
 void main() {
   group('DateTimeUtils', () {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:formation_front/i18n/strings.g.dart';
-import 'package:formation_front/modules/common/timeInputField/time_input_field.dart';
+import 'package:formation_front/modules/common/time_input_field/time_input_field.dart';
 
 void main() {
   testWidgets("TimeInputField displays correctly", (WidgetTester tester) async {
