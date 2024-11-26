@@ -4,15 +4,13 @@ import 'package:formation_front/modules/common/snack_bar/controllers/cubit.dart'
 import 'package:formation_front/modules/meetings/controllers/cubit.dart';
 import 'package:formation_front/modules/meetings/widgets/meetings_view.dart';
 import 'package:formation_front/modules/rooms/repository/rooms_repository.dart';
-
+import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import '../../utils/mouse_back_detector.dart';
 import 'repository/meetings_repository.dart';
 
 class MeetingsPage extends StatelessWidget {
-  MeetingsPage({super.key});
-
-  final MeetingsRepository repository = MeetingsRepository();
-  final RoomsRepository roomsRepository = RoomsRepository();
+  const MeetingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +25,9 @@ class MeetingsPage extends StatelessWidget {
       },
       child: BlocProvider(
           create: (context) => MeetingsCubit(
-                repository,
+                MeetingsRepository(Provider.of<http.Client>(context, listen: false)),
                 BlocProvider.of<NotificationCubit>(context),
-                roomsRepository,
+                RoomsRepository(Provider.of<http.Client>(context, listen: false)),
               ),
           child: const MeetingsView()),
     );

@@ -1,21 +1,16 @@
 import 'package:formation_front/modules/rooms/model/room_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/io_client.dart' as http_io;
 
 import '../../../utils/api/api_service.dart';
 
 class RoomsRepository {
   ApiService _apiService = ApiService();
-  http.Client _client = http_io.IOClient();
+  final http.Client _client;
 
-  RoomsRepository();
+  RoomsRepository(this._client);
 
   setApiService(ApiService service) {
     _apiService = service;
-  }
-
-  setClient(http.Client client) {
-    _client = client;
   }
 
   Future<List<Room>> getRooms() async {

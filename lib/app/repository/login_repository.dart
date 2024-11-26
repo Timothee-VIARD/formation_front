@@ -1,21 +1,20 @@
 import 'package:http/http.dart' as http;
-import 'package:http/io_client.dart' as http_io;
 
 import '../../../../utils/api/api_service.dart';
 import '../model/token_model.dart';
 
 class LoginRepository {
   ApiService _apiService = ApiService();
-  http.Client _client = http_io.IOClient();
+  final http.Client _client;
 
-  LoginRepository();
+  LoginRepository(this._client);
 
   void setApiService(ApiService apiService) {
     _apiService = apiService;
   }
 
-  void setClient(http.Client client) {
-    _client = client;
+  http.Client getClient() {
+    return _client;
   }
 
   Future<Token> login(Map<String, dynamic> data) async {

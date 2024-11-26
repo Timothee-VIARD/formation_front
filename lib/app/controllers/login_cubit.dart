@@ -9,10 +9,11 @@ import '../repository/login_repository.dart';
 class LoginCubit extends Cubit<LoginState> {
   final LoginRepository repository;
   final NotificationCubit notificationCubit;
+  late final UsersRepository usersRepository;
 
-  LoginCubit(this.repository, this.notificationCubit) : super(LoginInitial());
-
-  final UsersRepository usersRepository = UsersRepository();
+  LoginCubit(this.repository, this.notificationCubit) : super(LoginInitial()) {
+    usersRepository = UsersRepository(repository.getClient());
+  }
 
   Future<void> login(Login login) async {
     try {

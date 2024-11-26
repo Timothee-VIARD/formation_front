@@ -1,22 +1,17 @@
 import 'package:formation_front/modules/meetings/model/meeting_answer_model.dart';
 import 'package:formation_front/modules/meetings/model/meeting_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/io_client.dart' as http_io;
 
 import '../../../utils/api/api_service.dart';
 
 class MeetingsRepository {
   ApiService _apiService = ApiService();
-  http.Client _client = http_io.IOClient();
+  final http.Client _client;
 
-  MeetingsRepository();
+  MeetingsRepository(this._client);
 
   setApiService(ApiService service) {
     _apiService = service;
-  }
-
-  setClient(http.Client client) {
-    _client = client;
   }
 
   Future<List<MeetingAnswer>> getMeetings() async {
@@ -25,8 +20,8 @@ class MeetingsRepository {
   }
 
   Future createMeeting(Meeting data, String token) async {
-    final response =
-        await _apiService.post('/reunions/', data.toJson(), false, _client, token);
+    final response = await _apiService.post(
+        '/reunions/', data.toJson(), false, _client, token);
     return response['id'];
   }
 
